@@ -1,0 +1,57 @@
+//@extend-elements
+//original selectors
+//.mod .bd, .mod .ft, .mod .hd
+%extend_1 {
+    overflow: hidden;
+    *overflow: visible;
+    zoom: 1;
+}
+
+//original selectors
+//.media .bd, .media .ft, .media .hd
+%extend_2 {
+    overflow: hidden;
+    *overflow: visible;
+    zoom: 1;
+}
+
+
+.mod {
+    .inner {
+        position: relative;
+    }
+    .bd {
+        @extend %extend_1;
+    }
+    .ft {
+        @extend %extend_1;
+    }
+    .hd {
+        @extend %extend_1;
+    }
+}
+.media {
+    overflow: hidden;
+    *overflow: visible;
+    zoom: 1;
+    .media-left {
+        float: left;
+        margin-right: 14px;
+    }
+    .media-right {
+        float: right;
+        margin-left: 14px;
+    }
+    .bd {
+        @extend %extend_2;
+    }
+    .ft {
+        @extend %extend_2;
+    }
+    .hd {
+        @extend %extend_2;
+    }
+    .img img {
+        display: block;
+    }
+}
