@@ -65,6 +65,9 @@ task :post do
     post.puts "---"
     post.puts "layout: post"
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
+    post.puts "title_section: "
+    post.puts "    first: \"#{title.gsub(/-/,' ').split(' ').first}\""
+    post.puts "    second: \"#{title.gsub(/-/,' ').split(' ')[1,title.gsub(/-/,' ').split(' ').length].join(' ')}\""
     post.puts 'description: ""'
     post.puts "category: #{category}"
     post.puts "tags: #{tags}"
