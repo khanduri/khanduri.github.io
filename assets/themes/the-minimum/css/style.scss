@@ -1,3 +1,4 @@
+
 //colors
 $white: #ffffff;
 $color_nandor_approx: #555d50;
@@ -54,6 +55,7 @@ $font_20: Bitstream Vera Sans Mono;
 $font_21: Courier New;
 $font_22: Courier;
 $font_23: monospace;
+$font_24: Gotham;
 
 //@extend-elements
 //original selectors
@@ -276,7 +278,7 @@ pre {
 }
 .the-header {
     .logo {
-        font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
+        font-family: $font_24, $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
         margin: 0;
         a:visited {
             color: #555D50;
