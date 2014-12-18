@@ -25,7 +25,7 @@ range of available importers to choose from.
 
 ###Migration
 We first need to get to the admin export page on wordpress at 
-[https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php](https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php). 
+*[https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php](https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php)*. 
 I chose to download all content of my blog and saved it in a file named *wordpress.xml*.
 
 ![Exporting from Wordpress admin console]({{ site.url }}/assets/posts/exporting_from_wordpress_admin_console.png)

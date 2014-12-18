@@ -2,6 +2,12 @@
 @import url(module.css);
 @import url(syntaxhighlighter.css);
 @import url(helper.css);
+h1, h2, h3, h4, h5, h6, .the-header .logo {
+  font-family: junctionregularRegular, Tahoma, Osaka, Courier New, monospace; }
+
+body, pre {
+  font-family: Gotham, Univers, Calibri, Gill Sans, Gill Sans MT, DejaVu Sans Condensed, Nimbus Sans L, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, sans-serif, serif; }
+
 h1, .h1 {
   font-size: 42px;
   line-height: 52px;
@@ -62,32 +68,25 @@ h4, .h4 {
   margin-right: auto; }
 
 body {
-  font-family: Frutiger, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-size: 1em;
   line-height: 1.625em; }
 
 h1 {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-weight: bold; }
 
 h2 {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-weight: bold; }
 
 h3 {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-weight: bold; }
 
 h4 {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-weight: bold; }
 
 h5 {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-weight: bold; }
 
 h6 {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   font-weight: bold; }
 
 p {
@@ -134,20 +133,20 @@ em {
   font-weight: bold; }
 
 @font-face {
-  font-family: junctionregularRegular;
+  font-family: serif;
   src: url("/assets/themes/the-minimum/font/Junction-webfont.eot");
   src: url("/assets/themes/the-minimum/font/Junction-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/themes/the-minimum/font/Junction-webfont.woff") format("woff"), url("/assets/themes/the-minimum/font/Junction-webfont.ttf") format("truetype"), url("/assets/themes/the-minimum/font/Junction-webfont.svg#junctionregularRegular") format("svg");
   font-weight: normal !important;
   font-style: normal; }
 html {
   background-color: #ffffff;
-  color: #555D50; }
+  color: #555d50; }
 
 a:link {
-  color: #555D50;
+  color: #555d50;
   text-decoration: none; }
 a:visited {
-  color: #555D50;
+  color: #555d50;
   text-decoration: none; }
 a:hover {
   color: #474747;
@@ -158,7 +157,6 @@ pre {
   color: #f2f2f2;
   background-color: #393939;
   border: 1px solid #393939;
-  font-family: Bitstream Vera Sans Mono, Courier New, Courier, monospace;
   margin-left: 0;
   margin-right: 0;
   padding: 1.625em;
@@ -166,10 +164,9 @@ pre {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.6); }
 
 .the-header .logo {
-  font-family: junctionregularRegular, Frutiger Linotype, Univers, Calibri, Gill Sans, Gill Sans MT, Myriad Pro, Myriad, DejaVu Sans Condensed, Liberation Sans, Nimbus Sans L, Tahoma, Geneva, Helvetica Neue, Helvetica, Arial, MS PGothic, Osaka, Sans-Serif;
   margin: 0; }
   .the-header .logo a:visited {
-    color: #555D50; }
+    color: #555d50; }
 .the-header .nav-global {
   text-transform: uppercase; }
   .the-header .nav-global .forkme {
@@ -191,60 +188,60 @@ pre {
   padding-top: 1.625em;
   padding-bottom: 1.625em; }
   .unit-article header h1 {
-    color: #555D50;
+    color: #555d50;
     margin-top: 0;
     margin-bottom: 0; }
 .unit-article .entry-content h2 {
-  color: #555D50; }
+  color: #555d50; }
   .unit-article .entry-content h2 a:link {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h2 a:visited {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h2 a:hover {
     color: #474747;
     border: 0; }
 .unit-article .entry-content h3 {
-  color: #555D50; }
+  color: #555d50; }
   .unit-article .entry-content h3 a:link {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h3 a:visited {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h3 a:hover {
     color: #474747;
     border: 0; }
 .unit-article .entry-content h4 {
-  color: #555D50; }
+  color: #555d50; }
   .unit-article .entry-content h4 a:link {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h4 a:visited {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h4 a:hover {
     color: #474747;
     border: 0; }
 .unit-article .entry-content h5 {
-  color: #555D50; }
+  color: #555d50; }
   .unit-article .entry-content h5 a:link {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h5 a:visited {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h5 a:hover {
     color: #474747;
     border: 0; }
 .unit-article .entry-content h6 {
-  color: #555D50; }
+  color: #555d50; }
   .unit-article .entry-content h6 a:link {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h6 a:visited {
-    color: #555D50;
+    color: #555d50;
     border: 0; }
   .unit-article .entry-content h6 a:hover {
     color: #474747;
@@ -458,7 +455,7 @@ pre {
         background-color: #e1e1e1;
         border: 1px solid #77bb77; }
   .layout-page .tag_box span {
-    background-color: #555D50;
+    background-color: #555d50;
     border: 1px solid #99cc99;
     padding: 1px 5px;
     border-radius: 10px;
@@ -480,7 +477,7 @@ pre {
 .the-footer {
   background-color: #1a1a1a;
   background-color: rgba(21, 25, 25, 0.8);
-  color: #555D50;
+  color: #555d50;
   color: rgba(250, 250, 250, 0.8);
   padding-bottom: 1.625em; }
   .the-footer a:link {
@@ -507,13 +504,13 @@ pre {
     margin-right: auto; }
 
 .sec-01-a {
-  color: #555D50; }
+  color: #555d50; }
 
 .sec-01-b {
-  color: #A7C44C; }
+  color: #a7c44c; }
 
 .sec-02-a {
-  color: #555D50; }
+  color: #555d50; }
 
 .sec-02-b {
   color: #F0FFF0; }
