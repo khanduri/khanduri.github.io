@@ -5,20 +5,20 @@ pre .err {
   color: #a61717;
   background-color: #e3d2d2; }
 pre .g {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .k {
   color: #6ab825;
   font-weight: bold; }
 pre .l {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .n {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .o {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .x {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .p {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .cm {
   color: #999999;
   font-style: italic; }
@@ -35,7 +35,7 @@ pre .cs {
 pre .gd {
   color: #d22323; }
 pre .ge {
-  color: #d0d0d0;
+  color: #ccc;
   font-style: italic; }
 pre .gr {
   color: #d22323; }
@@ -45,11 +45,11 @@ pre .gh {
 pre .gi {
   color: #589819; }
 pre .go {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .gp {
   color: #aaaaaa; }
 pre .gs {
-  color: #d0d0d0;
+  color: #ccc;
   font-weight: bold; }
 pre .gu {
   color: #ffffff;
@@ -74,7 +74,7 @@ pre .kt {
   color: #6ab825;
   font-weight: bold; }
 pre .ld {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .m {
   color: #3677a9; }
 pre .s {
@@ -91,20 +91,20 @@ pre .no {
 pre .nd {
   color: #ffa500; }
 pre .ni {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .ne {
   color: #bbbbbb; }
 pre .nf {
   color: #447fcf; }
 pre .nl {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .nn {
   color: #447fcf;
   text-decoration: underline; }
 pre .nx {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .py {
-  color: #d0d0d0; }
+  color: #ccc; }
 pre .nt {
   color: #6ab825;
   font-weight: bold; }

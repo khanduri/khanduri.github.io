@@ -1,61 +1,4 @@
-
-//colors
-$white: #ffffff;
-$color_nandor_approx: #555d50;
-$color_gravel_approx: #474747;
-$concrete: #f2f2f2;
-$color_tuatara_approx: #393939;
-$black_30: rgba(0, 0, 0, 0.3);
-$white_60: rgba(255, 255, 255, 0.6);
-$color_conifer_approx: #bada55;
-$color_granny_smith_apple_approx: #99cc99;
-$color_de_york_approx: #77bb77;
-$color_surf_approx: #bbddbb;
-$color_aztec_80_approx: rgba(21, 25, 25, 0.8);
-$color_celeste_approx: #ccc;
-$color_desert_storm_approx: #f8f8f8;
-$color_tan_hide_approx: #f99157;
-$color_trinidad_approx: #e25608;
-$color_emperor_approx: #4d4d4d;
-$color_feta_approx: #f0fff0;
-$color_mountain_mist_approx: #999999;
-$black_40: rgba(0, 0, 0, 0.4);
-$white_40: rgba(255, 255, 255, 0.4);
-$color_hippie_green_approx: #448844;
-$black_20: rgba(0, 0, 0, 0.2);
-$black_60: rgba(0, 0, 0, 0.6);
-$color_tom_thumb_approx: #336633;
-$color_bon_jour_approx: #e1e1e1;
-$color_rangoon_green_approx: #1a1a1a;
-$alabaster_80: rgba(250, 250, 250, 0.8);
-$color_celery_approx: #a7c44c;
-
-//fonts
-$font_0: junctionregularRegular;
-$font_1: Frutiger;
-$font_2: Frutiger Linotype;
-$font_3: Univers;
-$font_4: Calibri;
-$font_5: Gill Sans;
-$font_6: Gill Sans MT;
-$font_7: Myriad Pro;
-$font_8: Myriad;
-$font_9: DejaVu Sans Condensed;
-$font_10: Liberation Sans;
-$font_11: Nimbus Sans L;
-$font_12: Tahoma;
-$font_13: Geneva;
-$font_14: Helvetica Neue;
-$font_15: Helvetica;
-$font_16: Arial;
-$font_17: MS PGothic;
-$font_18: Osaka;
-$font_19: Sans-Serif;
-$font_20: Bitstream Vera Sans Mono;
-$font_21: Courier New;
-$font_22: Courier;
-$font_23: monospace;
-$font_24: Gotham;
+@import "constants.scss";
 
 //@extend-elements
 //original selectors
@@ -144,43 +87,42 @@ $font_24: Gotham;
     margin-right: auto;
 }
 
-
 @import "base.css";
 @import "module.css";
 @import "syntaxhighlighter.css";
 @import "helper.css";
 body {
-    font-family: $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-size: 1em;
     line-height: 1.625em;
+    @extend %font_text;
 }
 h1 {
-    font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-weight: bold;
     @extend %extend_1;
+    @extend %font_title;
 }
 h2 {
-    font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-weight: bold;
     @extend %extend_2;
+    @extend %font_title;
 }
 h3 {
-    font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-weight: bold;
     @extend %extend_3;
+    @extend %font_title;
 }
 h4 {
-    font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-weight: bold;
     @extend %extend_4;
+    @extend %font_title;
 }
 h5 {
-    font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-weight: bold;
+    @extend %font_title;
 }
 h6 {
-    font-family: $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
     font-weight: bold;
+    @extend %font_title;
 }
 .h1 {
     @extend %extend_1;
@@ -239,7 +181,7 @@ em {
     font-weight: bold;
 }
 @font-face {
-    font-family: $font_0;
+    font-family: $font_text_14;
     src: url('/assets/themes/the-minimum/font/Junction-webfont.eot');
     src: url('/assets/themes/the-minimum/font/Junction-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/themes/the-minimum/font/Junction-webfont.woff') format('woff'), url('/assets/themes/the-minimum/font/Junction-webfont.ttf') format('truetype'), url('/assets/themes/the-minimum/font/Junction-webfont.svg#junctionregularRegular') format('svg');
     font-weight: normal !important;
@@ -247,15 +189,15 @@ em {
 }
 html {
     background-color: $white;
-    color: #555D50;
+    color: $color_nandor_approx;
 }
 a {
     &:link {
-        color: #555D50;
+        color: $color_nandor_approx;
         text-decoration: none;
     }
     &:visited {
-        color: #555D50;
+        color: $color_nandor_approx;
         text-decoration: none;
     }
     &:hover {
@@ -268,7 +210,7 @@ pre {
     color: $concrete;
     background-color: $color_tuatara_approx;
     border: 1px solid $color_tuatara_approx;
-    font-family: $font_20, $font_21, $font_22, $font_23;
+    @extend %font_text;
     margin-left: 0;
     margin-right: 0;
     padding: 1.625em;
@@ -278,10 +220,10 @@ pre {
 }
 .the-header {
     .logo {
-        font-family: $font_24, $font_0, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8, $font_9, $font_10, $font_11, $font_12, $font_13, $font_14, $font_15, $font_16, $font_17, $font_18, $font_19;
+        @extend %font_title;
         margin: 0;
         a:visited {
-            color: #555D50;
+            color: $color_nandor_approx;
         }
     }
     .nav-global {
@@ -309,7 +251,7 @@ pre {
         padding-top: 1.625em;
         padding-bottom: 1.625em;
         h1 {
-            color: #555D50;
+            color: $color_nandor_approx;
             margin-top: 0;
             margin-bottom: 0;
         }
@@ -317,14 +259,14 @@ pre {
     .entry-content {
         @extend %extend_7;
         h2 {
-            color: #555D50;
+            color: $color_nandor_approx;
             a {
                 &:link {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:visited {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:hover {
@@ -334,14 +276,14 @@ pre {
             }
         }
         h3 {
-            color: #555D50;
+            color: $color_nandor_approx;
             a {
                 &:link {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:visited {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:hover {
@@ -351,14 +293,14 @@ pre {
             }
         }
         h4 {
-            color: #555D50;
+            color: $color_nandor_approx;
             a {
                 &:link {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:visited {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:hover {
@@ -368,14 +310,14 @@ pre {
             }
         }
         h5 {
-            color: #555D50;
+            color: $color_nandor_approx;
             a {
                 &:link {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:visited {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:hover {
@@ -385,14 +327,14 @@ pre {
             }
         }
         h6 {
-            color: #555D50;
+            color: $color_nandor_approx;
             a {
                 &:link {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:visited {
-                    color: #555D50;
+                    color: $color_nandor_approx;
                     border: 0;
                 }
                 &:hover {
@@ -631,19 +573,19 @@ pre {
     }
     .unit-foot {
         background: url('/assets/themes/the-minimum/skin/100-90-5-monochrome.png') repeat 0 0 $color_emperor_approx;
-        color: #F0FFF0;
+        color: $color_feta_approx;
         padding-top: 1.625em;
         padding-bottom: 1.625em;
         position: relative;
         a {
             &:link {
-                color: #F0FFF0;
+                color: $color_feta_approx;
             }
             &:visited {
-                color: #F0FFF0;
+                color: $color_feta_approx;
             }
             &:hover {
-                color: #F0FFF0;
+                color: $color_feta_approx;
             }
         }
         .gotop {
@@ -725,7 +667,7 @@ pre {
             }
         }
         span {
-            background-color: #555D50;
+            background-color: $color_nandor_approx;
             border: 1px solid $color_granny_smith_apple_approx;
             padding: 1px 5px;
             //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
@@ -755,7 +697,7 @@ pre {
 .the-footer {
     background-color: $color_rangoon_green_approx;
     background-color: $color_aztec_80_approx;
-    color: #555D50;
+    color: $color_nandor_approx;
     color: $alabaster_80;
     padding-bottom: 1.625em;
     a {
@@ -792,16 +734,16 @@ pre {
     }
 }
 .sec-01-a {
-    color: #555D50;
+    color: $color_nandor_approx;
 }
 .sec-01-b {
-    color: #A7C44C;
+    color: $color_celery_approx;
 }
 .sec-02-a {
-    color: #555D50;
+    color: $color_nandor_approx;
 }
 .sec-02-b {
-    color: #F0FFF0;
+    color: $color_feta_approx;
 }
 .ie {
     .the-header {

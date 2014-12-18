@@ -1,0 +1,86 @@
+//colors
+$white: #ffffff;
+$white_40: rgba(255, 255, 255, 0.4);
+$white_60: rgba(255, 255, 255, 0.6);
+$black: #000;
+$black_20: rgba(0, 0, 0, 0.2);
+$black_30: rgba(0, 0, 0, 0.3);
+$black_40: rgba(0, 0, 0, 0.4);
+$black_60: rgba(0, 0, 0, 0.6);
+$color_aztec_80_approx: rgba(21, 25, 25, 0.8);
+$alabaster_80: rgba(250, 250, 250, 0.8);
+$color_nandor_approx: #555d50;
+$color_gravel_approx: #474747;
+$concrete: #f2f2f2;
+$color_tuatara_approx: #393939;
+$color_conifer_approx: #bada55;
+$color_granny_smith_apple_approx: #99cc99;
+$color_de_york_approx: #77bb77;
+$color_surf_approx: #bbddbb;
+$color_celeste_approx: #ccc;
+$color_desert_storm_approx: #f8f8f8;
+$color_tan_hide_approx: #f99157;
+$color_trinidad_approx: #e25608;
+$color_emperor_approx: #4d4d4d;
+$color_feta_approx: #F0FFF0;
+$color_mountain_mist_approx: #999999;
+$color_hippie_green_approx: #448844;
+$color_tom_thumb_approx: #336633;
+$color_bon_jour_approx: #e1e1e1;
+$color_rangoon_green_approx: #1a1a1a;
+$color_celery_approx: #a7c44c;
+$color_blue_approx: #00e;
+$color_daisy_bush_approx: #551a8b;
+$color_blue_ribbon_approx: #06e;
+$color_pale_canary_approx: #ff9;
+$color_yellow_approx: #ff0;
+$color_bizarre_approx: #f0dddd;
+$color_tamarillo_approx: #a61717;
+$color_swiss_coffee_approx: #e3d2d2;
+$color_lima_approx: #6ab825;
+$color_persian_red_approx: #cd2828;
+$color_red_approx: #e50808;
+$color_mahogany_approx: #520000;
+$color_thunderbird_approx: #d22323;
+$color_vida_loca_approx: #589819;
+$color_silver_chalice_approx: #aaaaaa;
+$color_astral_approx: #3677a9;
+$color_gamboge_approx: #ed9d13;
+$color_pink_swan_approx: #bbbbbb;
+$color_jelly_bean_approx: #24909d;
+$color_havelock_blue_approx: #447fcf;
+$color_turquoise_blue_approx: #40ffff;
+$web_orange: #ffa500;
+$color_storm_dust_approx: #666666;
+
+//fonts
+$font_title_1: junctionregularRegular;
+$font_title_2: Tahoma;
+$font_title_3: Osaka;
+$font_title_4: Courier New;
+$font_title_5: monospace;
+
+$font_text_1: Gotham;
+$font_text_2: Univers;
+$font_text_3: Calibri;
+$font_text_4: Gill Sans;
+$font_text_5: Gill Sans MT;
+$font_text_6: DejaVu Sans Condensed;
+$font_text_7: Nimbus Sans L;
+$font_text_8: Geneva;
+$font_text_9: Helvetica Neue;
+$font_text_10: Helvetica;
+$font_text_11: Arial;
+$font_text_12: MS PGothic;
+$font_text_13: sans-serif;
+$font_text_14: serif;
+
+
+%font_title {
+    font-family: $font_title_1, $font_title_2, $font_title_3, $font_title_4, $font_title_5;
+}
+
+%font_text {
+    font-family: $font_text_1, $font_text_2, $font_text_3, $font_text_4, $font_text_5, $font_text_6, $font_text_7, $font_text_8, $font_text_9, $font_text_10, $font_text_11, $font_text_12, $font_text_13, $font_text_14;
+}
+

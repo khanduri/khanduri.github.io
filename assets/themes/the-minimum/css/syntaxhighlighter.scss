@@ -1,25 +1,4 @@
-
-//colors
-$color_mountain_mist_approx: #999999;
-$color_tamarillo_approx: #a61717;
-$color_swiss_coffee_approx: #e3d2d2;
-$color_celeste_approx: #d0d0d0;
-$color_lima_approx: #6ab825;
-$color_persian_red_approx: #cd2828;
-$color_red_approx: #e50808;
-$color_mahogany_approx: #520000;
-$color_thunderbird_approx: #d22323;
-$white: #ffffff;
-$color_vida_loca_approx: #589819;
-$color_silver_chalice_approx: #aaaaaa;
-$color_astral_approx: #3677a9;
-$color_gamboge_approx: #ed9d13;
-$color_pink_swan_approx: #bbbbbb;
-$color_jelly_bean_approx: #24909d;
-$color_havelock_blue_approx: #447fcf;
-$color_turquoise_blue_approx: #40ffff;
-$web_orange: #ffa500;
-$color_storm_dust_approx: #666666;
+@import "constants.scss";
 
 pre {
     .c {
