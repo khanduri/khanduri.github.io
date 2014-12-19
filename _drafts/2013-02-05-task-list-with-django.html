@@ -1,0 +1,173 @@
+---
+layout: post
+title: Simple blog listing site
+date: 2013-02-05 08:23:43.000000000 -08:00
+categories:
+- WebDev
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '42984455'
+  geo_public: '0'
+  _publicize_pending: '1'
+author:
+  login: prashantkhanduri
+  email: prashant.khanduri@gmail.com
+  display_name: Khanduri
+  first_name: ''
+  last_name: ''
+---
+<p>This post will cover setting up a basic blog site. We'll perform the following:</p>
+<ul>
+<li>Create the blog app</li>
+<li>Add our models for the blog application</li>
+<li>Enable the Django admin interface</li>
+<li>Create urls</li>
+<li>Create generic views (Using the <a href="https://docs.djangoproject.com/en/1.4/topics/generic-views/" title="Django generic views">Django generic views</a>)</li>
+</ul>
+<p>Let's get started!</p>
+<p>We finished the <a href="http://techneekr.wordpress.com/2013/02/04/first-django-project/" title="Django: Environment setup">last post</a> by creating a project named <strong>mysite</strong>. For this post, I've moved to another project called <strong>oneLiner</strong>. </p>
+<p>[sourcecode language="bash"]<br />
+python manage.py startapp blogs<br />
+[/sourcecode]</p>
+<p>Will create the app for you with a directory named <strong>blogs</strong> and 3 files (models.py, tests.py and views.py). We need to create our models first. For this we need to define the Author and the Entry model. Edit <em>models.py</em> to look like the following:</p>
+<p>[sourcecode language="python"]<br />
+from django.db import models</p>
+<p>class Author(models.Model):<br />
+    first_name = models.CharField(max_length=100)<br />
+    last_name= models.CharField(max_length=100)</p>
+<p>    def __unicode__(self):<br />
+        return &quot;%s %s&quot; % (self.first_name, self.last_name)</p>
+<p>class Entry(models.Model):<br />
+    text = models.CharField(max_length=100)<br />
+    author = models.ForeignKey(Author)</p>
+<p>    def __unicode__(self):<br />
+        return &quot;%s %s&quot; % (self.text, self.author)<br />
+[/sourcecode]</p>
+<p>We next need to add this app to our application list in our <em>settings.py</em> file.</p>
+<p>[sourcecode language="python"]<br />
+INSTALLED_APPS = (<br />
+    ...<br />
+    'blogs',<br />
+    ...<br />
+)<br />
+[/sourcecode]</p>
+<p>If we run a <strong>python manage.py syncdb</strong> at this point Django should create 2 tables for us: <em>blogs_author</em> and <em>blogs_entry</em> (app_name underscore model_name).</p>
+<p>We can't really do much at this point as we need a way to first add a few Author and Entry instances in our Database. There are many ways to do this (Using the Django python shell to create instances, using the Django dbshell to add entries to the database, or using the Django admin interface). We'll go through setting up an admin interface for our models and add instances from there.</p>
+<p>Change the following files:</p>
+<p>[sourcecode language="python"]<br />
+# Change the settings.py file to include the django admin app<br />
+INSTALLED_APPS = (<br />
+    ...<br />
+    'django.contrib.admin',<br />
+    ...<br />
+)</p>
+<p># Change the project url.py file with the following<br />
+...<br />
+# Uncomment the next two lines to enable the admin:<br />
+from django.contrib import admin<br />
+admin.autodiscover()<br />
+...<br />
+urlpatterns = patterns('',<br />
+    ...<br />
+    # Uncomment the next line to enable the admin:<br />
+    url(r'^admin/', include(admin.site.urls)),<br />
+    ...<br />
+)</p>
+<p># Change the blogs models.py file to register our models with the admin<br />
+from django.db import models<br />
+from django.contrib import admin</p>
+<p>class Author(models.Model):<br />
+    first_name = models.CharField(max_length=100)<br />
+    last_name= models.CharField(max_length=100)</p>
+<p>    def __unicode__(self):<br />
+        return &quot;%s %s&quot; % (self.first_name, self.last_name)</p>
+<p>class Entry(models.Model):<br />
+    text = models.CharField(max_length=100)<br />
+    author = models.ForeignKey(Author)</p>
+<p>    def __unicode__(self):<br />
+        return &quot;%s %s&quot; % (self.text, self.author)</p>
+<p>admin.site.register(Author)<br />
+admin.site.register(Entry)<br />
+[/sourcecode]</p>
+<p>At this point we should have all our changes in, so we should just be able to sync the database and run our server to hit the admin endpoint.</p>
+<p>[sourcecode language="bash"]<br />
+# This should create the tables required by Django admin app<br />
+# If you didn't create a superuser account earlier (while setting<br />
+# up the project and runnign syncdb for the first time, just<br />
+# delete the db file and run syncdb again and register a superuser)<br />
+# .. We'll need this during our admin login.<br />
+python manage.py syncdb<br />
+python manage.py runserver<br />
+[/sourcecode]</p>
+<p>At this point you should be able to hit the http://localhost:8000/admin endpoint and see a login screen.</p>
+<p><a href="http://techneekr.files.wordpress.com/2013/02/screen-shot-2013-02-23-at-2-58-03-pm.png"><img src="assets/screen-shot-2013-02-23-at-2-58-03-pm.png?w=300" alt="Screen Shot 2013-02-23 at 2.58.03 PM" width="300" height="182" class="alignnone size-medium wp-image-64" /></a></p>
+<p>Go ahead and login. You should see something similar to the following:<br />
+<a href="http://techneekr.files.wordpress.com/2013/02/screen-shot-2013-02-23-at-2-59-38-pm.png"><img src="assets/screen-shot-2013-02-23-at-2-59-38-pm.png?w=300" alt="Screen Shot 2013-02-23 at 2.59.38 PM" width="300" height="130" class="alignnone size-medium wp-image-65" /></a></p>
+<p>Note that we have <em>Authors</em> and <em>Entrys</em> under <strong>Blogs</strong> section. Take a few mins and create a few authors and blog entries here. Feel free to look around the other parts of the admin interface, we'll go deeper into them in other posts.</p>
+<p>We've made good progress so far and we just have a few steps left. However before moving forward it's probably a good point for us to go and look at <a href="https://docs.djangoproject.com/en/1.4/ref/generic-views/" title="Generic Views">Generic view</a>. We'll be using them shortly.</p>
+<p>Please do look over <a href="https://docs.djangoproject.com/en/1.4/ref/generic-views/" title="Generic Views">Generic view</a> .. I'll wait .. :)</p>
+<p>.</p>
+<p>Ok you should have a basic understanding of generic view so the following will go a bit fast.</p>
+<p>We'll be creating 2 generic views (for listing al authors and listing all entries in our db). You should be able to set the views by changing the project urls.py to lok similar to the following:</p>
+<p>[sourcecode language="python"]<br />
+...</p>
+<p>from blogs.models import Author<br />
+from blogs.models import Entry</p>
+<p>author_info = {<br />
+    &quot;queryset&quot; : Author.objects.all()<br />
+}</p>
+<p>entry_info = {<br />
+    &quot;queryset&quot; : Entry.objects.all()<br />
+}</p>
+<p>urlpatterns = patterns('',<br />
+    ...<br />
+    url(r'^authors', list_detail.object_list, author_info),<br />
+    url(r'^entrys', list_detail.object_list, entry_info),<br />
+    ...<br />
+)<br />
+...<br />
+[/sourcecode]</p>
+<p>IF you read the <a href="https://docs.djangoproject.com/en/1.4/ref/generic-views/" title="Generic Views">Generic view</a> docs you should know that we'll need 2 templates at this point as well. The following should do the trick for a basic listings page:</p>
+<p>[sourcecode language="html"]<br />
+&lt;!-- The following goes into blogs/entry_list.html --&gt;<br />
+{% extends &quot;base.html&quot; %}</p>
+<p>{% block content %}<br />
+    &lt;h2&gt;Entry List&lt;/h2&gt;<br />
+    &lt;ul&gt;<br />
+        {% for entry in object_list %}<br />
+            &lt;li&gt;<br />
+                {{ entry.author }}<br />
+                {{ entry.text }}<br />
+            &lt;/li&gt;<br />
+        {% endfor %}<br />
+    &lt;/ul&gt;<br />
+{% endblock %}</p>
+<p>&lt;!-- The following goes into blogs/author_list.html --&gt;<br />
+{% extends &quot;base.html&quot; %}</p>
+<p>{% block content %}<br />
+    &lt;h2&gt;Authors&lt;/h2&gt;<br />
+    &lt;ul&gt;<br />
+        {% for author in object_list %}<br />
+            &lt;li&gt;<br />
+                {{ author.first_name }}<br />
+                {{ author.last_name }}<br />
+            &lt;/li&gt;<br />
+        {% endfor %}<br />
+    &lt;/ul&gt;<br />
+{% endblock %}</p>
+<p>&lt;!-- Feel free to change the base.html yo whatever you want to beautify the page--&gt;<br />
+&lt;html&gt;<br />
+&lt;body&gt;<br />
+    {% block content %}<br />
+    {% endblock %}<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/sourcecode]</p>
+<p>You should now be able to hit http://localhost:8000/entrys and http://localhost:8000/authors page (don't forget to <strong>runserver</strong>) and see the list of authors and entries you had created using the admin views.</p>
+<p>We won't be building on top of these templates and urls to provide a full <a href="http://en.wikipedia.org/wiki/CRUD_(acronym)">CRUD enabled</a> blog site. </p>
+<p>I hope to continue building on this app by exposing a RESTful api  (using <a href="http://django-tastypie.readthedocs.org/en/latest/">tastypie</a>) over the blog resources and consume it on client side with <a href="http://angularjs.org/">AngularJS</a>. Hopefully that post should be coming out soon.</p>
+<p>If you find something that you disagree with or have suggestions for improvements, please comment back (or feel free to contact me).</p>
+<p>regards</p>
