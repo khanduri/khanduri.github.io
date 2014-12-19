@@ -1,0 +1,146 @@
+---
+layout: post
+title: Facebook Authentication with Django-Social-Auth
+date: 2013-03-23 19:43:41.000000000 -07:00
+categories:
+- WebDev
+tags: []
+status: private
+type: post
+published: false
+meta:
+  _edit_last: '42984455'
+author:
+  login: prashantkhanduri
+  email: prashant.khanduri@gmail.com
+  display_name: Khanduri
+  first_name: ''
+  last_name: ''
+---
+<p>- add django-social-auth==0.7.19 in the requirements file<br />
+- add 'social_auth' in the installed apps</p>
+<p>[sourcecode language="python"]<br />
+INSTALLED_APPS = (<br />
+     ...<br />
+    'social_auth',<br />
+     ...<br />
+)</p>
+<p>AUTHENTICATION_BACKENDS = (<br />
+    'social_auth.backends.facebook.FacebookBackend',</p>
+<p>    # The following can go into the TEMPLATE_CONTEXT_PROCESSORS as well<br />
+    # FIXME : Dont skip if using django.auth user model or users wont be able to login.<br />
+    # look into eternal user models (other than django)<br />
+    'django.contrib.auth.backends.ModelBackend',<br />
+)</p>
+<p>TEMPLATE_CONTEXT_PROCESSORS = (<br />
+    # Adds a social_auth dict where each key is a provider name and its value is a UserSocialAuth instance if user has associated an account with that provider, otherwise None.<br />
+    'social_auth.context_processors.social_auth_by_name_backends',</p>
+<p>    'social_auth.context_processors.social_auth_backends',<br />
+    'social_auth.context_processors.social_auth_by_type_backends',<br />
+    'social_auth.context_processors.social_auth_login_redirect',</p>
+<p>    # This is used for the admin view<br />
+    'django.contrib.auth.context_processors.auth',<br />
+)</p>
+<p>SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook',)</p>
+<p># Note: Can be set as an os.environ[]<br />
+FACEBOOK_APP_ID = 'YOUR-APP-ID'<br />
+FACEBOOK_API_SECRET =  'YOUT-API-SECRET'</p>
+<p>SOCIAL_AUTH_DEFAULT_USERNAME = 'test_social_auth_user'</p>
+<p>LOGIN_URL          = '/login/'<br />
+LOGIN_REDIRECT_URL = '/'<br />
+LOGIN_ERROR_URL    = '/login/login_error/'</p>
+<p># FIXME: I left these commented out as I would like to revisit them soon and better understand where and how they are used.<br />
+#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/another-login-url/'<br />
+#SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'<br />
+#SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'<br />
+#SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'<br />
+#SOCIAL_AUTH_BACKEND_ERROR_URL = '/new-error-url/'<br />
+#SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'<br />
+#SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'<br />
+[/sourcecode]</p>
+<p>- add a new app 'django-admin.py startapp loginmgmt'<br />
+- add the urls we will be defining soon in the loginmgmt app into the project urls.py class</p>
+<p>[source language="python"]<br />
+urlpatterns = patterns('',<br />
+    ...<br />
+    url(r'', include('loginmgmt.urls')),<br />
+    ...<br />
+)<br />
+[/source]</p>
+<p>- Create a urls.py file in the loginmgmt app and add correct views into the file.</p>
+<p>[source language="python"]<br />
+from loginmgmt import views<br />
+from django.conf.urls import patterns, url, include<br />
+from django.views.generic.simple import direct_to_template</p>
+<p>login_uris = patterns('',<br />
+    url(r'^$', direct_to_template,  {'template': 'login/index.html'}),<br />
+    url(r'^coming_soon/$', direct_to_template,  {'template': 'login/index.html','extra_context': {'coming_soon': True,}}),<br />
+    url(r'^login_error/$', direct_to_template, {'template': 'login/index.html','extra_context': {'login_error': True,}}),<br />
+    url(r'^login_required/$', direct_to_template, {'template': 'login/index.html','extra_context': {'login_required': True,}}),<br />
+)</p>
+<p>urlpatterns = patterns('',<br />
+    url(r'^$', views.index),<br />
+    url(r'^login/', include(login_uris)),<br />
+    url(r'^logout$', views.logout),<br />
+)</p>
+<p>[/source]</p>
+<p>- In the views.py file</p>
+<p>[source language="python"]<br />
+from django.shortcuts import render<br />
+from django.shortcuts import redirect<br />
+from django.contrib.auth import logout as user_logout</p>
+<p>def index(request):<br />
+    data = dict()<br />
+    if request.user.is_authenticated():<br />
+        # FIXME : Add logging<br />
+        print &quot;Logged in user = %s&quot; % request.user.id<br />
+        request.session['user_id'] = request.user.id<br />
+        data.update({'user': request.user})<br />
+        return render(request, 'login/index.html', data)<br />
+    else:<br />
+        return redirect('/login')</p>
+<p>def logout(request):<br />
+    del request.session['user_id']<br />
+    user_logout(request)<br />
+    return redirect('/login')</p>
+<p>[/source]</p>
+<p>- syncdb .. I forgot it too :)</p>
+<p>[code language="html"]<br />
+&lt;body&gt;<br />
+&lt;div class=&quot;navbar navbar-fixed-top&quot;&gt;<br />
+    &lt;div class=&quot;navbar-inner&quot;&gt;<br />
+        &lt;div class=&quot;container&quot;&gt;<br />
+            &lt;a href=&quot;/&quot; class=&quot;brand&quot;&gt;OneLiner&lt;/a&gt;<br />
+{% if user.is_authenticated %}<br />
+            &lt;ul class=&quot;nav&quot;&gt;<br />
+                &lt;li id=&quot;search&quot;&gt;&lt;a href=&quot;#&quot;&gt;Search&lt;/a&gt;&lt;/li&gt;<br />
+                &lt;li class=&quot;divider-vertical&quot;&gt;&lt;/li&gt;<br />
+                &lt;li id=&quot;liked&quot;&gt;&lt;a href=&quot;#&quot;&gt;Liked&lt;/a&gt;&lt;/li&gt;<br />
+                &lt;li class=&quot;divider-vertical&quot;&gt;&lt;/li&gt;<br />
+                &lt;li id=&quot;rated&quot;&gt;&lt;a href=&quot;#&quot;&gt;Rated&lt;/a&gt;&lt;/li&gt;<br />
+            &lt;/ul&gt;<br />
+            &lt;ul class=&quot;nav pull-right&quot;&gt;<br />
+                &lt;li&gt;&lt;a href=&quot;/logout&quot;&gt;Logout&lt;/a&gt;&lt;/li&gt;<br />
+            &lt;/ul&gt;<br />
+&lt;div id=&quot;wrap&quot;&gt;<br />
+&lt;div id=&quot;main&quot; class=&quot;container top-margin&quot;&gt;<br />
+    &lt;div class=&quot;hero-unit&quot;&gt;<br />
+        &lt;form class=&quot;form-horizontal&quot;&gt;<br />
+            &lt;div class=&quot;input-append&quot;&gt;<br />
+                &lt;label&gt;Logged In!&lt;/label&gt;<br />
+            &lt;/div&gt;<br />
+        &lt;/form&gt;<br />
+{% block content %}{% endblock content%}<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+{% else %}<br />
+            &lt;ul class=&quot;nav pull-right&quot;&gt;<br />
+                &lt;li&gt;&lt;a href='facebook'&gt;&lt;img src=&quot;/static/images/login/fb_signin_1.png&quot;/&gt;&lt;/a&gt;&lt;/li&gt;<br />
+            &lt;/ul&gt;<br />
+{% endif %}<br />
+        &lt;/div&gt;<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+[/code]</p>

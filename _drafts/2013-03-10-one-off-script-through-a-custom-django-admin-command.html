@@ -1,0 +1,56 @@
+---
+layout: post
+title: One off script through a custom django-admin command
+date: 2013-03-10 03:39:31.000000000 -07:00
+categories:
+- WebDev
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '42984455'
+  _publicize_pending: '1'
+  geo_public: '0'
+author:
+  login: prashantkhanduri
+  email: prashant.khanduri@gmail.com
+  display_name: Khanduri
+  first_name: ''
+  last_name: ''
+---
+<p>In our previous <a href="http://techneekr.wordpress.com/2013/02/05/task-list-with-django/">example</a> on setting up  a simple blog, we ended up hooking up the Django admin interface and added a few blog items through that portal. In this blog, I hope to show you how to add a <a href="https://docs.djangoproject.com/en/1.5/howto/custom-management-commands/">custom Django-admin command</a> that can potentially help us run a one-of script to load up some garbage data we can easily test our app functionality with.</p>
+<p>Let's get started!</p>
+<p>You can read the <a href="https://docs.djangoproject.com/en/1.5/howto/custom-management-commands/">Writing custom django-admin commands</a> page to get the details of how to add a custom command into manage.py. For this blog, we'll start with adding the <strong>management/commands</strong> directory under our <strong>blog</strong> app directory.</p>
+<p>Let's create a <a href="http://djangosnippets.org/snippets/877/">execute.py</a> file in the commands dir and add the following code to it:</p>
+<p>[sourcecode language="python"]<br />
+import sys</p>
+<p>from django.core.management.base import LabelCommand<br />
+from django.utils import termcolors</p>
+<p>style = termcolors.make_style(fg='green', opts=('bold',))</p>
+<p>class Command(LabelCommand):<br />
+    label = 'filename'<br />
+    args = '&lt;filename filename ...&gt;'<br />
+    help = 'Executes the given file under the context of the current Django settings'<br />
+    requires_model_validation = False</p>
+<p>    def handle_label(self, label, **options):<br />
+        sys.stderr.write(style('Running %s' % label))<br />
+        execfile(label, dict(__name__='__main__'))<br />
+[/sourcecode]</p>
+<p>We now have a new command registered with manage.py and should be able to run arbitrary python scripts from the command line with the context of a given project. So let's create teh file we wish to execute.</p>
+<p>Since we need a one-off to get this job done, lets create a separate section for those files so that we can track them separately. I try and use <strong>scripts/one-off/</strong> for these scripts. SO go ahead and create something similar and place a <strong>populate_garbage_blog_data.py</strong> in there. The file can contain your own code on how you sigh to populate teh data. To populate some random garbage information, feel free to use the following script:</p>
+<p>[sourcecode language="python"]<br />
+from blogs.models import Entry<br />
+from blogs.models import Author</p>
+<p># get the first author you find in the db<br />
+def_author = Author.objects.get(pk=1)</p>
+<p># create a 100 random entries for the default author<br />
+for i in range(100):<br />
+        e = Entry.objects.create()<br />
+        e.text = &quot;Some random blog entry string.. This is the garbage string I had mentioned earlier. Feel free to select this from another source!&quot;<br />
+        e.author = def_author<br />
+        e.save()<br />
+[/sourcecode]</p>
+<p>We just need to execute this script to fill our db with this garbage data. So <strong>cd</strong> back to the django project and simply run <strong>python manage.py execute scripts/one-off/populate_garbage_blog_data.py</strong> and done!</p>
+<p>As always, if you find something that you disagree with or have suggestions for improvements, please comment back (or feel free to contact me).</p>
+<p>regards</p>

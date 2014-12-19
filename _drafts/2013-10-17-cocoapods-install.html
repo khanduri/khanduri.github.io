@@ -1,0 +1,48 @@
+---
+layout: post
+title: 'Cocoapods : Install'
+date: 2013-10-17 22:29:02.000000000 -07:00
+categories:
+- MobileDev
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '42984455'
+  _publicize_pending: '1'
+  geo_public: '0'
+author:
+  login: prashantkhanduri
+  email: prashant.khanduri@gmail.com
+  display_name: Khanduri
+  first_name: ''
+  last_name: ''
+---
+<p><a href="https://github.com/CocoaPods/CocoaPods">Cocoapods</a> is an ObjectiveC package manager. If you're not already using it, you should give it a try.</p>
+<p>Cocoapods can be easily installed and updated as instructed on their <a href="http://docs.cocoapods.org/guides/installing_cocoapods.html">installation</a> page. The command to install and upgrade cocoapods is: </p>
+<p>[sourcecode language="bash"]<br />
+$ [sudo] gem install cocoapods<br />
+[/sourcecode]</p>
+<p>Issues I ran into on OS X (Mountain Lion):</p>
+<p>Please note you'll need the latest command line tools for xcode installed as well. You can manually download a dmg from Apple's <a href="https://developer.apple.com/downloads/index.action">Developer download site</a>.</p>
+<p>Another alternative is by opening up XCode -&gt; Preferences -&gt; Downloads -&gt; Components and hitting the install next to Command Line Tools.</p>
+<p><a href="http://techneekr.files.wordpress.com/2013/10/screen-shot-2013-10-17-at-1-07-05-pm.png"><img src="assets/screen-shot-2013-10-17-at-1-07-05-pm.png?w=300" alt="Screen Shot 2013-10-17 at 1.07.05 PM" width="300" height="183" class="alignnone size-medium wp-image-129" /></a></p>
+<p>Skipping this step caused me to get the following (and was resolved once I had <code>make</code> installed through the command line tools): </p>
+<p>[sourcecode language="bash"]<br />
+$gem install cocoapods<br />
+Building native extensions.  This could take a while...<br />
+/usr/local/Cellar/ruby/2.0.0-p195/lib/ruby/2.0.0/rubygems/ext/builder.rb:47: warning: Insecure world writable dir /usr/local/bin in PATH, mode 040777<br />
+ERROR:  Error installing cocoapods:<br />
+	ERROR: Failed to build gem native extension.</p>
+<p>    /usr/local/Cellar/ruby/2.0.0-p195/bin/ruby extconf.rb<br />
+creating Makefile</p>
+<p>make<br />
+sh: make: command not found<br />
+[/sourcecode]</p>
+<p>I also had to link the installed pod into /usr/bin/</p>
+<p>[sourcecode language="bash"]<br />
+$gem env # look for EXECUTABLE DIRECTORY<br />
+export PATH=&quot;EXECUTABLE DIRECTORY:$PATH&quot; # gem bins<br />
+export PATH=&quot;/usr/local/Cellar/ruby/2.0.0-p195/bin:$PATH&quot; # gem bins<br />
+[/sourcecode]</p>

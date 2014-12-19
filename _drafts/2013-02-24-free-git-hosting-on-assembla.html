@@ -1,0 +1,29 @@
+---
+layout: post
+title: Free git hosting on assembla!
+date: 2013-02-24 00:19:40.000000000 -08:00
+categories:
+- WebDev
+tags: []
+status: private
+type: post
+published: false
+meta:
+  _publicize_pending: '1'
+  _edit_last: '42984455'
+author:
+  login: prashantkhanduri
+  email: prashant.khanduri@gmail.com
+  display_name: Khanduri
+  first_name: ''
+  last_name: ''
+---
+<p><img class="alignnone size-full wp-image-94" alt="assembla" src="assets/assembla.png" width="168" height="71" /></p>
+<p><a href="https://www.assembla.com/">Assembla</a> is offering <a href="http://offers.assembla.com/free-git-hosting/">free private git repositories</a>. Github is a good option too, but to use their free version your repo has to be public (private ones costs near $7/month).</p>
+<p>Once you sign up follow the instructions to setup your environment for the first time. Assembla should provide with these instruction as the default landing page once you signup.</p>
+<p>Once the setup in configured for the first time, to add more future projects in you assembla account, all you would need to do on your machine is:</p>
+<pre>git remote add origin git@git.assembla.com:&lt;your_git_repo_name&gt;.git
+git remote -v # should verify that it was added in
+git push origin master
+</pre>
+<p>regards</p>

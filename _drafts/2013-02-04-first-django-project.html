@@ -1,0 +1,105 @@
+---
+layout: post
+title: 'Django: Environment setup'
+date: 2013-02-04 07:15:34.000000000 -08:00
+categories:
+- WebDev
+tags:
+- django
+- pip
+- python
+- virtualenv
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '42984455'
+  geo_public: '0'
+  _publicize_pending: '1'
+author:
+  login: prashantkhanduri
+  email: prashant.khanduri@gmail.com
+  display_name: Khanduri
+  first_name: ''
+  last_name: ''
+---
+<p>In this post, we'll be covering how I normally setup Django projects. We won't be building anything on this <strong>yet</strong>. This is just to get the project scaffolding up. The following is what we'll be playing with today:</p>
+<ul>
+<li><span style="line-height:13px;"><a style="line-height:19px;" href="http://www.pip-installer.org/en/latest/">pip</a><span style="color:#333333;line-height:19px;">: python package installer</span></span></li>
+<li><a href="http://pypi.python.org/pypi/virtualenv">virtualenv</a>: A tool to create isolated virtual python environment</li>
+<li><a href="https://www.djangoproject.com/">Django</a>: the Django!</li>
+</ul>
+<h4>Install Pip</h4>
+<p>The first step is to install pip (the python package installer). The following worked for me on a Mac:</p>
+<p>[sourcecode language="bash"]<br />
+# Fetch the pip tar. Notice this points to version 1.2.1 (you may want to change it to the newest version)<br />
+curl -O http://pypi.python.org/packages/source/p/pip/pip-1.2.1.tar.gz<br />
+tar xvfz pip-1.2.1.tar.gz<br />
+cd pip-1.2.1<br />
+# Install pip<br />
+[sudo] python setup.py install<br />
+# Check pip's version number (mainly to check if the install was successful)<br />
+pip --version<br />
+[/sourcecode]</p>
+<p>If everything goes well, you should see the pip version number (along with the python library path where pip was installed).</p>
+<h4>Setup your virtual environment</h4>
+<p>Let's say you wish to work on multiple projects at once and there seems to be overlap between libraries that you use. However they all point to different versions. This is where creating a virtualenv comes into play. Creating a virtualenv space helps you <strong>isolate all your python environments</strong> and helps you test things <strong>without polluting your system installs</strong>.</p>
+<p>I would highly recommend setting a virtual environment before starting to build out your project.</p>
+<p>Setting up a virtualenv instance is as simple as:</p>
+<p>[sourcecode language="bash"]<br />
+# Install virtualenv if you don't already have it<br />
+pip install virtualenv<br />
+# We will be using this directory to build out our django project<br />
+mkdir djangoTut<br />
+cd djangoTut<br />
+virtualenv --no-site-packages virEnvDjangoTut<br />
+echo $PATH<br />
+source virEnvDjangoTut/bin/activate<br />
+echo $PATH<br />
+# This is just to show you how to deactivate the environment. We'll need an active virtualenv when we'll be playing with django<br />
+deactivate<br />
+[/sourcecode]</p>
+<p>Ok. Let's take a step back and take a deeper dive into what just happened.</p>
+<p>We first installed virtualenv (you'll only need to do this once). We then created the <strong>djangoTut</strong> directory and within the dir, we created a virtualenv by running <strong>virtualenv --no-site-packages virEnvDjangoTut</strong> (the --no-site-packages option isolates your your environment from the main site-packages directory). At this point we've created the particular virtual environment, but we still need to "activate" it. Before we activate the virtualenv instance, I added in an echo on the <strong>$PATH</strong> variable. I mainly wanted you to notice the difference activating the virtualenv makes on PATH. After activating the environment, you should notice the "/usr/bin" location in your PATH to now point to your virtualenv's bin location. This is where we'll be installing all our required dependencies.</p>
+<h3>Let's unchain Django</h3>
+<p><img src="assets/hdr_logo.gif" alt="Django Logo" /></p>
+<p>FINALLY! We have our isolated environment laid out. It's time to setup our Django project.</p>
+<p>[sourcecode language="bash"]<br />
+echo &quot;Django==1.4.3&quot; &gt; requirements.txt<br />
+pip -r requierments.txt<br />
+django-admin.py startproject mysite<br />
+[/sourcecode]</p>
+<p>It's nice to keep all dependencies and plugins in a <strong>requirements.txt</strong> file. This is really useful and helps us get a quick look into all that is required for us to run a particular project and get it all installed in one shot (pip -r does that). At this point we only care about installing Django (version 1.4.3), hence we only define that in our requirements.</p>
+<p><strong>We now have django installed.</strong> The first thing we want now is to create a new project ('mysite') using the django-admin command. This would create a 'mysite' directory with a few files in it. For now just open up <strong>settings.py</strong> and change the DATABASES section to look like the following:</p>
+<p>[sourcecode language="bash"]<br />
+DATABASES = {<br />
+    'default': {<br />
+        'ENGINE': 'django.db.backends.sqlite3',<br />
+        'NAME': 'default.sqlite3.db',<br />
+        'USER': '',                      # Not used with sqlite3.<br />
+        'PASSWORD': '',                  # Not used with sqlite3.<br />
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.<br />
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.<br />
+    }<br />
+}<br />
+[/sourcecode]</p>
+<p>We've just asked Django to use sqlite as your default db. We can now run back to the <strong>manage.py</strong>, create the tables required by django, and get our first page in django to load after we run the server that is packages with django. We do that by running the following:</p>
+<p>[sourcecode language="bash"]<br />
+python manage.py syncdb  # this creates a the required tables (we'll need this as we make changes to the app)<br />
+python manage.py runserver<br />
+[/sourcecode]</p>
+<p>You should be able to hit Django Welcome page at <strong>http://localhost:8000/</strong> at this point. </p>
+<p>Congrats! We are now ready for learning all about Django.</p>
+<p>There's a great introduction to <a href="https://docs.djangoproject.com/en/dev/intro/tutorial01/">Writing your first Django app </a>as part of the Django documentation.  The tutorial covers:</p>
+<ul>
+<li>Installing Django</li>
+<li>Creating the project</li>
+<li>Writing basic Models</li>
+<li>Introduction to the Django admin interface</li>
+<li>Writing views</li>
+<li>Testing!</li>
+</ul>
+<p>I would recommend going through it, at least once (from end to end).</p>
+<p>Once you're done with the tutorial, feel free to come back and we'll continue with a sample project and cover similar topics (creating models / defining views) at a faster rate, and finally start playing with the different plugins available to us.</p>
+<p>If you find something that you disagree with or have suggestions for improvements, please comment back.</p>
+<p>regards</p>
