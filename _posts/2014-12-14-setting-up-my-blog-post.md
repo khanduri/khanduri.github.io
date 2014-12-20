@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Setting up my blog post"
+title: "Setting up my blog"
 title_section:
     first: Setting 
-    second: up my blog post
+    second: up my blog
 description: ""
 category: "setup"
 tags: [blog,jekyll,github-pages,jekyll-bootstrap]
