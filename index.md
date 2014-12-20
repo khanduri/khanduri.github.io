@@ -1,9 +1,9 @@
 ---
 layout: page
-title: TechExtract
+title: TechNudge
 title_section:
   first: Tech
-  second: Extract
+  second: Nudge
 tagline: A few learning from the software engineering side of my world
 ---
 {% include JB/setup %}
