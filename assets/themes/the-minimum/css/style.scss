@@ -363,7 +363,7 @@ pre {
     }
     a {
         &:link {
-            border-bottom: 1px dotted $color_granny_smith_apple_approx;
+            border-bottom: 1px dotted $color_conifer_approx;
         }
         &:visited {
             border-bottom: 1px dotted $color_de_york_approx;
@@ -634,7 +634,7 @@ pre {
             vertical-align: middle;
         }
         a {
-            background-color: $color_granny_smith_apple_approx;
+            background-color: $color_conifer_approx;
             float: left;
             border: 1px solid $color_hippie_green_approx;
             padding: 3px 6px;
@@ -661,18 +661,17 @@ pre {
                 background-color: $color_de_york_approx;
                 border: 1px solid $color_tom_thumb_approx;
                 span {
-                    background-color: $color_bon_jour_approx;
+                    background-color: $green_dark;
                     border: 1px solid $color_de_york_approx;
                 }
             }
         }
         span {
-            background-color: $color_nandor_approx;
-            border: 1px solid $color_granny_smith_apple_approx;
+            background-color: $green_dark;
+            border: 1px solid $green_darker;
             padding: 1px 5px;
             //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
             border-radius: 10px;
-            color: $color_rangoon_green_approx;
             display: inline-block;
             position: relative;
             vertical-align: middle;
@@ -702,7 +701,7 @@ pre {
     padding-bottom: 1.625em;
     a {
         &:link {
-            color: $color_granny_smith_apple_approx;
+            color: $color_conifer_approx;
             border: 0;
         }
         &:visited {
