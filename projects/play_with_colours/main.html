@@ -1,0 +1,88 @@
+<html>
+<head>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<style>
+  .colour-box-frame {
+    margin: 1px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .colour-box-img {
+    border: 1px solid #666;
+    padding: 50px;
+  }
+  .colour-box-text {
+    font-family: "inherit";
+    font-size: 20px;
+    border: 1px solid #666;
+  }
+  #colour-csv {
+    width: 90%;
+  }
+  .colour-input-div {
+    margin: 10px 5px 5px 5px;
+  }
+  #colour-todo {
+    background-color: #f7f7f9;
+    margin: 20px;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Playing with Colours</h1>
+<!-- cat assets/themes/the-minimum/css/constants.scss | grep "#" | sed "s/:/     /g" | sed "s/ //g" | cut -f2 | paste -sd " " - -->
+      <div class="colour-input-div"><input id="colour-csv"></input></div>
+      <div class="colour-input-div"><strong>Sample Input: </strong>#ffffff; #000; #555d50; #474747; #929292; #393939; #bada55;</div>
+      <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="colour-process-button">Process</button></div>
+    </div>
+    <div id="canvas"></div>
+  </div>
+  <div class="container">
+    <div id="colour-todo">
+      <h4>Todo</h4>
+    	<ul>
+        <s><li>Given a list of colours, generate a grid of colours</li></s>
+        <li>Given an html page / link fetch all its colours</li>
+    		<li>Given a colour, generate gradients of the same shade</li>
+    		<li>Be able to Add / Remove colour boxes</li>
+    		<li>Be able to save colour setup</li>
+    	</ul>
+    </div>
+  </div>
+
+  <div id="colour-box-template" class="colour-box-frame col-md-2 hidden">
+    <div class="colour-box-img"></div>
+    <div class="colour-box-text"></div>
+  </div>
+</body>
+
+<script>
+  $( document ).ready(function() {
+    $( "#canvas" ).sortable();
+    $( "#canvas" ).disableSelection();
+
+    $("#colour-process-button").click(function(event){
+      event.preventDefault();
+      var colours = $("#colour-csv").val().split(";");
+      var colourHtml = '';
+      for (index in colours) {
+        var colour = colours[index].replace('#', '').trim();
+        if (colour == "") continue;
+        if (colour.length == 3) colour = colour + colour;
+        var template = $("#colour-box-template").clone().removeClass('hidden');
+        template.attr("id", "#colour-box-template_" + index);
+        template.children(".colour-box-text").text(colour.toUpperCase());
+        template.children(".colour-box-img").css("background-color", colour);
+        $('#canvas').append(template);
+      }
+    });
+  });
+</script>
+</html>
