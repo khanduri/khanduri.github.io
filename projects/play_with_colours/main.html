@@ -55,7 +55,7 @@
         </div>
         <div id="content-html-parse" class="hidden">
           <div class="colour-input-div">
-            <textarea rows="9" cols="100" placeholder="Paste the source code here .. We'll fetch all the colours"></textarea>
+            <textarea id="source-process-text" rows="9" cols="100" placeholder="Paste the source code here .. We'll fetch all the colours"></textarea>
           </div>
           <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
         </div>
@@ -68,15 +68,15 @@
     <div id="colour-todo">
       <h4>Todo</h4>
     	<ul>
-        <s><li>Given a list of colours, generate a grid of colours</li></s>
-        <li><strong>In Progress: </strong>Given a page source fetch all its colours</li>
-        <li>Given a link fetch all its colours</li>
-    		<li>Given a colour, generate gradients</li>
-    		<li>Be able to add colour boxes</li>
-    		<li>Be able to remove colour boxes</li>
+    		<li>Generate complementary / inverted colours based on the input</li>
     		<li>Be able to save colour setup</li>
-    		<li>Generate complementary / inverted colours . based on the input</li>
-        <li>Exporting colours functionality</li>
+    		<li>Be able to remove colour boxes</li>
+    		<li>Be able to add colour boxes</li>
+    		<li>Given a colour, generate gradients</li>
+        <li>Given a link fetch all its colours</li>
+        <li><strong>In Progress: </strong>Exporting colours functionality</li>
+        <s><li>Given a page source fetch all its colours</li></s>
+        <s><li>Given a list of colours, generate a grid of colours</li></s>
     	</ul>
     </div>
   </div>
@@ -89,37 +89,45 @@
 </body>
 
 <script>
-  $( document ).ready(function() {
-    $("#html-parse").click(function (e) {
-      e.preventDefault();
-      toggleActive(this);
-      $('#content-raw-colour-list').addClass('hidden');
-      $('#content-html-parse').removeClass('hidden');
-    });
-    $("#raw-colour-list").click(function (e) {
-      e.preventDefault();
-      toggleActive(this);
-      $('#content-raw-colour-list').removeClass('hidden');
-      $('#content-html-parse').addClass('hidden');
-    });
-
-    var toggleActive = function(selector){
-      $(".tab-options").each(function( index ) {
-        $(this).removeClass('active');
-      });
-      $(selector).addClass('active');
+  var extractColours = function(str){
+    var re = /(#[0-9A-Fa-f]{3,6})/g;
+    var m;
+    var colourDict = {};
+    while ((m = re.exec(str)) != null) {
+      if (m.index === re.lastIndex) {
+        re.lastIndex++;
+      }
+      var colour = fixedLengthColour(m[0]);
+      colourDict[colour] = colour;
     }
+    var colourArray = [];
+    for (var key in colourDict) {
+      colourArray.push(key);
+    }
+    return colourArray;
+  }
 
-    $( "#canvas" ).sortable();
-    $( "#canvas" ).disableSelection();
+  var toggleActive = function(selector){
+    $(".tab-options").each(function( index ) {
+      $(this).removeClass('active');
+    });
+    $(selector).addClass('active');
+  }
 
-    $("#colour-process-button").click(function(event){
-      event.preventDefault();
-      var colours = $("#colour-csv").val().split(";");
-      var colourHtml = '';
+  var fixedLengthColour = function(colour){
+    var flColour = colour.replace('#', '').trim();
+    if (flColour.length == 3) {
+      flColour += flColour;
+    }
+    return flColour;
+  }
+
+  var printColours = function(colours){
+      $('#canvas').empty();
       for (index in colours) {
         var colour = colours[index].replace('#', '').trim();
         if (colour == "") continue;
+        colour = fixedLengthColour(colour);
         if (colour.length == 3) colour = colour + colour;
         var template = $("#colour-box-template").clone().removeClass('hidden');
         template.attr("id", "#colour-box-template_" + index);
@@ -127,6 +135,37 @@
         template.children(".colour-box-img").css("background-color", colour);
         $('#canvas').append(template);
       }
+  }
+
+  $( document ).ready(function() {
+    $("#html-parse").click(function (e) {
+      e.preventDefault();
+      toggleActive(this);
+      $('#content-raw-colour-list').addClass('hidden');
+      $('#content-html-parse').removeClass('hidden');
+    });
+
+    $("#raw-colour-list").click(function (e) {
+      e.preventDefault();
+      toggleActive(this);
+      $('#content-raw-colour-list').removeClass('hidden');
+      $('#content-html-parse').addClass('hidden');
+    });
+
+    $( "#canvas" ).sortable();
+    $( "#canvas" ).disableSelection();
+
+    $("#source-process-button").click(function(event){
+      event.preventDefault();
+      var str = $('#source-process-text').val();
+      var colours = extractColours(str);
+      printColours(colours);
+    });
+
+    $("#colour-process-button").click(function(event){
+      event.preventDefault();
+      var colours = $("#colour-csv").val().split(";");
+      printColours(colours);
     });
   });
 </script>
