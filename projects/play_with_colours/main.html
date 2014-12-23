@@ -1,9 +1,10 @@
 <html>
 <head>
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <style>
   .colour-box-frame {
     margin: 1px;
@@ -31,16 +32,34 @@
     margin: 20px;
     padding: 20px;
   }
+  .tab-options {
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="jumbotron">
       <h1>Playing with Colours</h1>
-<!-- cat assets/themes/the-minimum/css/constants.scss | grep "#" | sed "s/:/     /g" | sed "s/ //g" | cut -f2 | paste -sd " " - -->
-      <div class="colour-input-div"><input id="colour-csv"></input></div>
-      <div class="colour-input-div"><strong>Sample Input: </strong>#ffffff; #000; #555d50; #474747; #929292; #393939; #bada55;</div>
-      <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="colour-process-button">Process</button></div>
+
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="tab-options active" id="raw-colour-list"><a>Raw Colour list</a></li>
+        <li role="presentation" class="tab-options" id="html-parse"><a>HTML Parse</a></li>
+      </ul>
+
+      <div id="content-placeholder">
+        <div id="content-raw-colour-list">
+          <div class="colour-input-div"><input id="colour-csv"></input></div>
+          <!-- cat assets/themes/the-minimum/css/constants.scss | grep "#" | sed "s/:/     /g" | sed "s/ //g" | cut -f2 | paste -sd " " - -->
+          <div class="colour-input-div"><strong>Sample Input: </strong>#ffffff; #000; #555d50; #474747; #929292; #393939; #bada55;</div>
+          <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="colour-process-button">Process</button></div>
+        </div>
+        <div id="content-html-parse" class="hidden">
+          <div class="colour-input-div"><textarea rows="9" cols="100" placeholder="Paste the source code in here .. We'll fetch all the colours for you"></textarea></div>
+          <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
+        </div>
+      </div>
+
     </div>
     <div id="canvas"></div>
   </div>
@@ -61,10 +80,30 @@
     <div class="colour-box-img"></div>
     <div class="colour-box-text"></div>
   </div>
+
 </body>
 
 <script>
   $( document ).ready(function() {
+    $("#html-parse").click(function (e) {
+      e.preventDefault();
+      $(".tab-options").each(function( index ) {
+        $(this).removeClass('active');
+      });
+      $(this).addClass('active');
+      $('#content-raw-colour-list').addClass('hidden');
+      $('#content-html-parse').removeClass('hidden');
+    });
+    $("#raw-colour-list").click(function (e) {
+      e.preventDefault();
+      $(".tab-options").each(function( index ) {
+        $(this).removeClass('active');
+      });
+      $(this).addClass('active');
+      $('#content-raw-colour-list').removeClass('hidden');
+      $('#content-html-parse').addClass('hidden');
+    });
+
     $( "#canvas" ).sortable();
     $( "#canvas" ).disableSelection();
 
