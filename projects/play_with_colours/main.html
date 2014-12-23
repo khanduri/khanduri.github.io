@@ -38,15 +38,14 @@
 </style>
 </head>
 <body>
+
   <div class="container">
     <div class="jumbotron">
       <h1>Playing with Colours</h1>
-
       <ul class="nav nav-tabs">
         <li role="presentation" class="tab-options active" id="raw-colour-list"><a>Raw Colour list</a></li>
         <li role="presentation" class="tab-options" id="html-parse"><a>HTML Parse</a></li>
       </ul>
-
       <div id="content-placeholder">
         <div id="content-raw-colour-list">
           <div class="colour-input-div"><input id="colour-csv"></input></div>
@@ -55,23 +54,29 @@
           <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="colour-process-button">Process</button></div>
         </div>
         <div id="content-html-parse" class="hidden">
-          <div class="colour-input-div"><textarea rows="9" cols="100" placeholder="Paste the source code in here .. We'll fetch all the colours for you"></textarea></div>
+          <div class="colour-input-div">
+            <textarea rows="9" cols="100" placeholder="Paste the source code here .. We'll fetch all the colours"></textarea>
+          </div>
           <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
         </div>
       </div>
-
     </div>
     <div id="canvas"></div>
   </div>
+
   <div class="container">
     <div id="colour-todo">
       <h4>Todo</h4>
     	<ul>
         <s><li>Given a list of colours, generate a grid of colours</li></s>
-        <li>Given an html page / link fetch all its colours</li>
-    		<li>Given a colour, generate gradients of the same shade</li>
-    		<li>Be able to Add / Remove colour boxes</li>
+        <li><strong>In Progress: </strong>Given a page source fetch all its colours</li>
+        <li>Given a link fetch all its colours</li>
+    		<li>Given a colour, generate gradients</li>
+    		<li>Be able to add colour boxes</li>
+    		<li>Be able to remove colour boxes</li>
     		<li>Be able to save colour setup</li>
+    		<li>Generate complementary / inverted colours . based on the input</li>
+        <li>Exporting colours functionality</li>
     	</ul>
     </div>
   </div>
@@ -87,22 +92,23 @@
   $( document ).ready(function() {
     $("#html-parse").click(function (e) {
       e.preventDefault();
-      $(".tab-options").each(function( index ) {
-        $(this).removeClass('active');
-      });
-      $(this).addClass('active');
+      toggleActive(this);
       $('#content-raw-colour-list').addClass('hidden');
       $('#content-html-parse').removeClass('hidden');
     });
     $("#raw-colour-list").click(function (e) {
       e.preventDefault();
-      $(".tab-options").each(function( index ) {
-        $(this).removeClass('active');
-      });
-      $(this).addClass('active');
+      toggleActive(this);
       $('#content-raw-colour-list').removeClass('hidden');
       $('#content-html-parse').addClass('hidden');
     });
+
+    var toggleActive = function(selector){
+      $(".tab-options").each(function( index ) {
+        $(this).removeClass('active');
+      });
+      $(selector).addClass('active');
+    }
 
     $( "#canvas" ).sortable();
     $( "#canvas" ).disableSelection();
@@ -124,4 +130,5 @@
     });
   });
 </script>
+
 </html>
