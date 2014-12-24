@@ -5,7 +5,11 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://rawgit.com/khanduri/colour.js/5ec36ab51cae157fc49cf4c9f38442b7c2507f38/colour.js" type="text/javascript"></script>
 <style>
+  body {
+    color: #444;
+  }
   .colour-box-frame {
     margin: 1px;
     text-align: center;
@@ -27,13 +31,19 @@
   .colour-input-div {
     margin: 10px 5px 5px 5px;
   }
-  #colour-todo {
+  .project-widget {
     background-color: #f7f7f9;
     margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
+    border-radius: 15px;
   }
   .tab-options {
     cursor: pointer;
+  }
+  .filler {
+    width: 95%;
   }
 </style>
 </head>
@@ -42,9 +52,10 @@
   <div class="container">
     <div class="jumbotron">
       <h1>Playing with Colours</h1>
+      <br>
       <ul class="nav nav-tabs">
         <li role="presentation" class="tab-options active" id="raw-colour-list"><a>Raw Colour list</a></li>
-        <li role="presentation" class="tab-options" id="html-parse"><a>HTML Parse</a></li>
+        <li role="presentation" class="tab-options" id="html-parse"><a>CSS Source Parse</a></li>
       </ul>
       <div id="content-placeholder">
         <div id="content-raw-colour-list">
@@ -55,17 +66,25 @@
         </div>
         <div id="content-html-parse" class="hidden">
           <div class="colour-input-div">
-            <textarea id="source-process-text" rows="9" cols="100" placeholder="Paste the source code here .. We'll fetch all the colours"></textarea>
+            <textarea id="source-process-text" rows="9" class="filler" placeholder="Paste css source code here .. We'll extract all the colours"></textarea>
           </div>
           <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
         </div>
       </div>
     </div>
+
     <div id="canvas"></div>
   </div>
 
   <div class="container">
-    <div id="colour-todo">
+    <div class="project-widget" id="export-colour">
+          <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="export-scss-button">Export scss constants</button></div>
+          <div class="colour-input-div"><textarea id="export-text" class="filler" rows="9" readonly></textarea></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="project-widget" id="colour-todo">
       <h4>Todo</h4>
     	<ul>
     		<li>Generate complementary / inverted colours based on the input</li>
@@ -90,7 +109,7 @@
 
 <script>
   var extractColours = function(str){
-    var re = /(#[0-9A-Fa-f]{3,6})/g;
+    var re = /(#[0-9A-Fa-f]{6}|#[0-9A-Fa-f]{3})/g;
     var m;
     var colourDict = {};
     while ((m = re.exec(str)) != null) {
@@ -108,6 +127,7 @@
   }
 
   var toggleActive = function(selector){
+    cleanCanvas();
     $(".tab-options").each(function( index ) {
       $(this).removeClass('active');
     });
@@ -123,21 +143,62 @@
   }
 
   var printColours = function(colours){
-      $('#canvas').empty();
+      cleanCanvas();
+      var printedColours = {};
       for (index in colours) {
         var colour = colours[index].replace('#', '').trim();
         if (colour == "") continue;
-        colour = fixedLengthColour(colour);
-        if (colour.length == 3) colour = colour + colour;
-        var template = $("#colour-box-template").clone().removeClass('hidden');
-        template.attr("id", "#colour-box-template_" + index);
-        template.children(".colour-box-text").text(colour.toUpperCase());
-        template.children(".colour-box-img").css("background-color", colour);
-        $('#canvas').append(template);
+        colour = fixedLengthColour(colour).toUpperCase();
+        if (!(colour in printedColours)){
+          var template = $("#colour-box-template").clone().removeClass('hidden');
+          template.attr("id", "#colour-box-template-" + index);
+          template.children(".colour-box-text").text('#' + colour);
+          template.children(".colour-box-img").css("background-color", colour);
+          $('#canvas').append(template);
+          printedColours[colour] = colour;
+        }
       }
   }
 
+  var cleanCanvas = function() {
+    $('#canvas').empty();
+    $('#export-text').text('');
+  }
+
+  var fetchColourDictFromCanvas = function() {
+    var colours = {}
+    $('#canvas').children('.colour-box-frame').each(function(index){
+      var colour = $(this).children('.colour-box-text').first().text();
+      var colourName = Colour(colour).getName();
+      if (!(colourName in colours)) {
+        colours[colourName] = [];
+      }
+      colours[colourName].push(colour);
+    });
+    return colours;
+  }
+
+  var printSCSSConstants = function(colours) {
+    for (var colourName in colours) {
+      for (var index in colours[colourName]) {
+        var comment = '';
+        if (colours[colourName].length > 1) {
+          comment = " // These seem to be dupes! Consider merging with single colour"
+        }
+        $('#export-text').text('$' + colourName + ': ' + colours[colourName][index] + ';' + comment + '\n' + $('#export-text').text());
+      }
+    }
+  }
+
   $( document ).ready(function() {
+    $('#export-scss-button').click(function(e){
+      e.preventDefault();
+
+      $('#export-text').text('');
+      var colours = fetchColourDictFromCanvas();
+      printSCSSConstants(colours);
+    });
+
     $("#html-parse").click(function (e) {
       e.preventDefault();
       toggleActive(this);
@@ -152,8 +213,8 @@
       $('#content-html-parse').addClass('hidden');
     });
 
-    $( "#canvas" ).sortable();
-    $( "#canvas" ).disableSelection();
+    $("#canvas").sortable();
+    $("#canvas").disableSelection();
 
     $("#source-process-button").click(function(event){
       event.preventDefault();
