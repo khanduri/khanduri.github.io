@@ -1,34 +1,33 @@
 <html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://rawgit.com/khanduri/color.js/ffce789432b864e2862e74ef3adc37c61b345256/color.js" type="text/javascript"></script>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://rawgit.com/khanduri/colour.js/5ec36ab51cae157fc49cf4c9f38442b7c2507f38/colour.js" type="text/javascript"></script>
 <style>
   body {
     color: #444;
   }
-  .colour-box-frame {
+  .color-box-frame {
     margin: 1px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
   }
-  .colour-box-img {
+  .color-box-img {
     border: 1px solid #666;
     padding: 50px;
   }
-  .colour-box-text {
+  .color-box-text {
     font-family: "inherit";
     font-size: 20px;
     border: 1px solid #666;
   }
-  #colour-csv {
+  #color-csv {
     width: 90%;
   }
-  .colour-input-div {
+  .color-input-div {
     margin: 10px 5px 5px 5px;
   }
   .project-widget {
@@ -51,24 +50,24 @@
 
   <div class="container">
     <div class="jumbotron">
-      <h1>Playing with Colours</h1>
+      <h1>Playing with Colors</h1>
       <br>
       <ul class="nav nav-tabs">
-        <li role="presentation" class="tab-options active" id="raw-colour-list"><a>Raw Colour list</a></li>
+        <li role="presentation" class="tab-options active" id="raw-color-list"><a>Raw Color list</a></li>
         <li role="presentation" class="tab-options" id="html-parse"><a>CSS Source Parse</a></li>
       </ul>
       <div id="content-placeholder">
-        <div id="content-raw-colour-list">
-          <div class="colour-input-div"><input id="colour-csv"></input></div>
+        <div id="content-raw-color-list">
+          <div class="color-input-div"><input id="color-csv"></input></div>
           <!-- cat assets/themes/the-minimum/css/constants.scss | grep "#" | sed "s/:/     /g" | sed "s/ //g" | cut -f2 | paste -sd " " - -->
-          <div class="colour-input-div"><strong>Sample Input: </strong>#ffffff; #000; #555d50; #474747; #929292; #393939; #bada55;</div>
-          <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="colour-process-button">Process</button></div>
+          <div class="color-input-div"><strong>Sample Input: </strong>#ffffff; #000; #555d50; #474747; #929292; #393939; #bada55;</div>
+          <div class="color-input-div"><button class="btn btn-lg btn-primary" id="color-process-button">Process</button></div>
         </div>
         <div id="content-html-parse" class="hidden">
-          <div class="colour-input-div">
-            <textarea id="source-process-text" rows="9" class="filler" placeholder="Paste css source code here .. We'll extract all the colours"></textarea>
+          <div class="color-input-div">
+            <textarea id="source-process-text" rows="9" class="filler" placeholder="Paste css source code here .. We'll extract all the colors"></textarea>
           </div>
-          <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
+          <div class="color-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
         </div>
       </div>
     </div>
@@ -77,53 +76,53 @@
   </div>
 
   <div class="container">
-    <div class="project-widget" id="export-colour">
-          <div class="colour-input-div"><button class="btn btn-lg btn-primary" id="export-scss-button">Export scss constants</button></div>
-          <div class="colour-input-div"><textarea id="export-text" class="filler" rows="9" readonly></textarea></div>
+    <div class="project-widget" id="export-color">
+          <div class="color-input-div"><button class="btn btn-lg btn-primary" id="export-scss-button">Export scss constants</button></div>
+          <div class="color-input-div"><textarea id="export-text" class="filler" rows="9" readonly></textarea></div>
     </div>
   </div>
 
   <div class="container">
-    <div class="project-widget" id="colour-todo">
+    <div class="project-widget" id="color-todo">
       <h4>Todo</h4>
     	<ul>
-    		<li>Generate complementary / inverted colours based on the input</li>
-    		<li>Be able to save colour setup</li>
-    		<li>Be able to remove colour boxes</li>
-    		<li>Be able to add colour boxes</li>
-    		<li>Given a colour, generate gradients</li>
-        <li>Given a link fetch all its colours</li>
-        <li><strong>In Progress: </strong>Exporting colours functionality</li>
-        <s><li>Given a page source fetch all its colours</li></s>
-        <s><li>Given a list of colours, generate a grid of colours</li></s>
+    		<li>Generate complementary / inverted colors based on the input</li>
+    		<li>Be able to save color setup</li>
+    		<li>Be able to add color boxes</li>
+    		<li>Given a color, generate gradients</li>
+        <li>Given a link fetch all its colors</li>
+    		<li><strong>In Progress: </strong>Be able to remove color boxes</li>
+        <s><li>Exporting colors functionality</li></s>
+        <s><li>Given a page source fetch all its colors</li></s>
+        <s><li>Given a list of colors, generate a grid of colors</li></s>
     	</ul>
     </div>
   </div>
 
-  <div id="colour-box-template" class="colour-box-frame col-md-2 hidden">
-    <div class="colour-box-img"></div>
-    <div class="colour-box-text"></div>
+  <div id="color-box-template" class="color-box-frame col-md-2 hidden">
+    <div class="color-box-img"></div>
+    <div class="color-box-text"></div>
   </div>
 
 </body>
 
 <script>
-  var extractColours = function(str){
+  var extractColors = function(str){
     var re = /(#[0-9A-Fa-f]{6}|#[0-9A-Fa-f]{3})/g;
     var m;
-    var colourDict = {};
+    var colorDict = {};
     while ((m = re.exec(str)) != null) {
       if (m.index === re.lastIndex) {
         re.lastIndex++;
       }
-      var colour = fixedLengthColour(m[0]);
-      colourDict[colour] = colour;
+      var color = fixedLengthColor(m[0]);
+      colorDict[color] = color;
     }
-    var colourArray = [];
-    for (var key in colourDict) {
-      colourArray.push(key);
+    var colorArray = [];
+    for (var key in colorDict) {
+      colorArray.push(key);
     }
-    return colourArray;
+    return colorArray;
   }
 
   var toggleActive = function(selector){
@@ -134,28 +133,28 @@
     $(selector).addClass('active');
   }
 
-  var fixedLengthColour = function(colour){
-    var flColour = colour.replace('#', '').trim();
-    if (flColour.length == 3) {
-      flColour += flColour;
+  var fixedLengthColor = function(color){
+    var flColor = color.replace('#', '').trim();
+    if (flColor.length == 3) {
+      flColor = flColor.substr(0,1) + flColor.substr(0,1) + flColor.substr(1,1) + flColor.substr(1,1) + flColor.substr(2,1) + flColor.substr(2,1);
     }
-    return flColour;
+    return '#' + flColor;
   }
 
-  var printColours = function(colours){
+  var printColors = function(colors){
       cleanCanvas();
-      var printedColours = {};
-      for (index in colours) {
-        var colour = colours[index].replace('#', '').trim();
-        if (colour == "") continue;
-        colour = fixedLengthColour(colour).toUpperCase();
-        if (!(colour in printedColours)){
-          var template = $("#colour-box-template").clone().removeClass('hidden');
-          template.attr("id", "#colour-box-template-" + index);
-          template.children(".colour-box-text").text('#' + colour);
-          template.children(".colour-box-img").css("background-color", colour);
+      var printedColors = {};
+      for (index in colors) {
+        var color = colors[index];
+        if (color == "") continue;
+        color = fixedLengthColor(color).toUpperCase();
+        if (!(color in printedColors)){
+          var template = $("#color-box-template").clone().removeClass('hidden');
+          template.attr("id", "color-box-template-" + index);
+          template.children(".color-box-text").text(color);
+          template.children(".color-box-img").css("background-color", color);
           $('#canvas').append(template);
-          printedColours[colour] = colour;
+          printedColors[color] = color;
         }
       }
   }
@@ -165,27 +164,27 @@
     $('#export-text').text('');
   }
 
-  var fetchColourDictFromCanvas = function() {
-    var colours = {}
-    $('#canvas').children('.colour-box-frame').each(function(index){
-      var colour = $(this).children('.colour-box-text').first().text();
-      var colourName = Colour(colour).getName();
-      if (!(colourName in colours)) {
-        colours[colourName] = [];
+  var fetchColorDictFromCanvas = function() {
+    var colors = {}
+    $('#canvas').children('.color-box-frame').each(function(index){
+      var color = $(this).children('.color-box-text').first().text();
+      var colorName = Color(color).getName();
+      if (!(colorName in colors)) {
+        colors[colorName] = [];
       }
-      colours[colourName].push(colour);
+      colors[colorName].push(color);
     });
-    return colours;
+    return colors;
   }
 
-  var printSCSSConstants = function(colours) {
-    for (var colourName in colours) {
-      for (var index in colours[colourName]) {
+  var printSCSSConstants = function(colors) {
+    for (var colorName in colors) {
+      for (var index in colors[colorName]) {
         var comment = '';
-        if (colours[colourName].length > 1) {
-          comment = " // These seem to be dupes! Consider merging with single colour"
+        if (colors[colorName].length > 1) {
+          comment = " // These seem to be dupes! Consider merging with single color"
         }
-        $('#export-text').text('$' + colourName + ': ' + colours[colourName][index] + ';' + comment + '\n' + $('#export-text').text());
+        $('#export-text').text('$' + colorName + ': ' + colors[colorName][index] + ';' + comment + '\n' + $('#export-text').text());
       }
     }
   }
@@ -195,38 +194,37 @@
       e.preventDefault();
 
       $('#export-text').text('');
-      var colours = fetchColourDictFromCanvas();
-      printSCSSConstants(colours);
+      var colors = fetchColorDictFromCanvas();
+      printSCSSConstants(colors);
     });
 
     $("#html-parse").click(function (e) {
       e.preventDefault();
       toggleActive(this);
-      $('#content-raw-colour-list').addClass('hidden');
+      $('#content-raw-color-list').addClass('hidden');
       $('#content-html-parse').removeClass('hidden');
     });
 
-    $("#raw-colour-list").click(function (e) {
+    $("#raw-color-list").click(function (e) {
       e.preventDefault();
       toggleActive(this);
-      $('#content-raw-colour-list').removeClass('hidden');
+      $('#content-raw-color-list').removeClass('hidden');
       $('#content-html-parse').addClass('hidden');
     });
 
-    $("#canvas").sortable();
-    $("#canvas").disableSelection();
+    $("#canvas").sortable().disableSelection();
 
     $("#source-process-button").click(function(event){
       event.preventDefault();
       var str = $('#source-process-text').val();
-      var colours = extractColours(str);
-      printColours(colours);
+      var colors = extractColors(str);
+      printColors(colors);
     });
 
-    $("#colour-process-button").click(function(event){
+    $("#color-process-button").click(function(event){
       event.preventDefault();
-      var colours = $("#colour-csv").val().split(";");
-      printColours(colours);
+      var colors = $("#color-csv").val().split(";");
+      printColors(colors);
     });
   });
 </script>
