@@ -8,21 +8,21 @@
 <style>
   body {
     color: #444;
+    background-color: #f7f7f9;
   }
   .color-box-frame {
     margin: 1px;
     text-align: center;
+    padding: 0px;
     margin-left: auto;
     margin-right: auto;
   }
   .color-box-img {
-    border: 1px solid #666;
     padding: 50px;
   }
   .color-box-text {
     font-family: "inherit";
     font-size: 20px;
-    border: 1px solid #666;
   }
   #color-csv {
     width: 90%;
@@ -60,7 +60,7 @@
         <div id="content-raw-color-list">
           <div class="color-input-div"><input id="color-csv"></input></div>
           <!-- cat assets/themes/the-minimum/css/constants.scss | grep "#" | sed "s/:/     /g" | sed "s/ //g" | cut -f2 | paste -sd " " - -->
-          <div class="color-input-div"><strong>Sample Input: </strong>#ffffff; #000; #555d50; #474747; #929292; #393939; #bada55;</div>
+          <div class="color-input-div"><strong>Sample Input: </strong>#ffffff, #000, #555d50, #474747, #929292, #393939, #bada55</div>
           <div class="color-input-div"><button class="btn btn-lg btn-primary" id="color-process-button">Process</button></div>
         </div>
         <div id="content-html-parse" class="hidden">
@@ -223,7 +223,7 @@
 
     $("#color-process-button").click(function(event){
       event.preventDefault();
-      var colors = $("#color-csv").val().split(";");
+      var colors = $("#color-csv").val().split(/[\s,;]+/);
       printColors(colors);
     });
   });

@@ -55,6 +55,8 @@ $web_orange: #ffa500;
 $color_storm_dust_approx: #666666;
 
 //fonts
+$font_mono_1: Courier;
+
 $font_title_1: junctionregularRegular;
 $font_title_2: Tahoma;
 $font_title_3: Osaka;
@@ -62,7 +64,7 @@ $font_title_4: Courier New;
 $font_title_5: monospace;
 
 $font_text_1: Gotham;
-$font_text_2: Univers;
+$font_text_2: Universe;
 $font_text_3: Calibri;
 $font_text_4: Gill Sans;
 $font_text_5: Gill Sans MT;
@@ -76,6 +78,9 @@ $font_text_12: MS PGothic;
 $font_text_13: sans-serif;
 $font_text_14: serif;
 
+%font_mono {
+    font-family: $font_mono_1;
+}
 
 %font_title {
     font-family: $font_title_1, $font_title_2, $font_title_3, $font_title_4, $font_title_5;
