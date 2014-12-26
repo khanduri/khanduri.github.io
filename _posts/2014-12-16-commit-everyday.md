@@ -30,7 +30,7 @@ rules, or maybe start to contribute to an open source project. I might even try 
 change to my own [dotfiles](https://github.com/khanduri/dotfiles) (hopefully it doesn't come to that). In any case, 
 I'm sure the introspection will be an interesting one for me.
 
-Just as a reference, here's what my [current github public contribution](https://github.com/khanduri/) graph looks like:
+Just as a reference, here's what my current [github public contribution](https://github.com/khanduri/) graph looks like:
 
 ![Github Public Contribution 20141217]({{ site.url }}/assets/posts/github_public_contribution_20141217.png)
 
