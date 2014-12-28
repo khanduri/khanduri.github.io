@@ -32,7 +32,7 @@ I'm sure the introspection will be an interesting one for me.
 
 Just as a reference, here's what my current [github public contribution](https://github.com/khanduri/) graph looks like:
 
-![Github Public Contribution 20141217]({{ site.url }}/assets/posts/github_public_contribution_20141217.png)
+![Github Public Contribution 20141217]({{ site.url }}/assets/posts/img/github_public_contribution_20141217.png)
 
 It's going to fill up with green block for sure, but I hope the green is meaningful!
 
