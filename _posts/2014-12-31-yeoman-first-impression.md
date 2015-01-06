@@ -10,6 +10,8 @@ tags: [javascript,angularjs,yeoman,frontend,grunt,bower]
 ---
 {% include JB/setup %}
 
+![Yeoman project]({{ site.url }}/assets/posts/img/yeoman.png)
+
 I have a LONG way to go when it comes to
 [front end engineering](http://en.wikipedia.org/wiki/Front_end_development),
 but its a path I'm really exited to walk on. I have a rough estimate of the
@@ -62,3 +64,5 @@ something real with it yet. For now, I've picked
 primary Yeoman generator) I'd like to learn more of.
 
 A good way to wrap up 2014 .. and a good todo list for 2015 :)
+
+![Yeoman rocket]({{ site.url }}/assets/posts/img/yeoman_rocket.png)
