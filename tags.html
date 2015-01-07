@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Tags
+title_section:
+  first: Tags
 header: Posts By Tag
 group: navigation
 ---
@@ -13,7 +15,7 @@ group: navigation
 
 
 {% for tag in site.tags %}
-  <h2 id="{{ tag[0] }}-ref">{{ tag[0] }}</h2>
+  <h4 id="{{ tag[0] }}-ref">{{ tag[0] }}</h4>
   <ul>
     {% assign pages_list = tag[1] %}
     {% include JB/pages_list %}
