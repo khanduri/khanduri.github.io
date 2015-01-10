@@ -577,7 +577,6 @@ pre {
         background: url('/assets/themes/the-minimum/skin/100-90-5-monochrome.png') repeat 0 0 $color_emperor_approx;
         color: $color_feta_approx;
         padding-top: 1.625em;
-        padding-bottom: 1.625em;
         position: relative;
         a {
             &:link {
@@ -589,6 +588,11 @@ pre {
             &:hover {
                 color: $color_feta_approx;
             }
+        }
+        h1 {
+            text-align: center;
+            font-size: 52px;
+            padding-bottom: 0.625em;
         }
         .gotop {
             margin-bottom: 0;
