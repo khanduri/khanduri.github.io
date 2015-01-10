@@ -14,14 +14,13 @@
 ## Want to use this as a template?
 
 ### Setup
- - fork the repo
- - git clone your fork
- - rm _posts
- - rm _drafts
- - rm projects.html
-  - write a cleanup script for this step
- - remove my commit history 
- - all set to use 
+ - git clone https://github.com/khanduri/khanduri.github.io.git
+ - cd into the repo
+ - ./_scripts/clean.sh 
+ - Setup your own repo on github (USERNAME.github.io)
+ - add it as a remote repo
+ - git push origin master
 
 ### Usage
+ - TO BE COMPLETED ...
  - rakefile info
