@@ -16,12 +16,12 @@
 ## Want to use this as a template for your blog?
 
 ### Setup
- - git clone https://github.com/khanduri/khanduri.github.io.git
+ - `git clone https://github.com/khanduri/khanduri.github.io.git`
  - cd into the repo
- - ./_scripts/clean.sh 
- - Setup your own repo on github (USERNAME.github.io)
+ - `./_scripts/clean.sh`
+ - Setup your own repo on github ([USERNAME.github.io](https://pages.github.com/))
  - add it as a remote repo
- - git push origin master
+ - `git push origin master`
 
 ### Usage
 
