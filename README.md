@@ -1,17 +1,17 @@
-# Destination for ...
+## Destination for ...
 
-## My Blog
+### My Blog
 
  - Blog available [here](http://khanduri.github.io/)
  - Powered by [jekyll](https://github.com/mojombo/jekyll)
  - Based on [Jekyll-bootstrap](http://jekyllbootstrap.com)
  - With modifications to [the_minimum](https://github.com/jekyllbootstrap/theme-the-minimum)
 
-## My Projects
+### My Projects
 
  - List available [here](http://khanduri.github.io/projects.html)
 
-## Want to use this as a template?
+## Want to use this as a template for your blog?
 
 ### Setup
  - git clone https://github.com/khanduri/khanduri.github.io.git
