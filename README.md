@@ -18,7 +18,7 @@
 ### Setup
  - `git clone https://github.com/khanduri/khanduri.github.io.git`
  - cd into the repo
- - `./_scripts/clean.sh`
+ - [./_scripts/clean.sh](https://github.com/khanduri/khanduri.github.io/blob/master/_scripts/clean.sh)
  - Setup your own repo on github ([USERNAME.github.io](https://pages.github.com/))
  - add it as a remote repo
  - `git push origin master`
