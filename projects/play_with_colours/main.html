@@ -1,7 +1,7 @@
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="https://rawgit.com/khanduri/color.js/ffce789432b864e2862e74ef3adc37c61b345256/color.js" type="text/javascript"></script>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -92,24 +92,24 @@
     <div class="project-widget" id="color-todo">
       <h4>Todo</h4>
     	<ul>
-    		<li>Generate complementary / inverted colors based on the input</li>
-    		<li>Be able to save color setup</li>
-    		<li>Be able to add color boxes</li>
-    		<li>Given a color, generate gradients</li>
+            <li>Generate complementary / inverted colors based on the input</li>
+            <li>Be able to "save" color setup</li>
+            <li>Be able to add color boxes</li>
             <li>Given a link fetch all its colors</li>
-    		<li><strong>In Progress: </strong>Be able to remove color boxes</li>
-        <s><li>Exporting colors functionality</li></s>
+            <li><strong>In Progress: </strong>Given a color, generate gradients</li>
+        <s><li>Be able to remove color boxes</li></s>
+        <s><li>Exporting colors to SCSS constants</li></s>
         <s><li>Given a page source fetch all its colors</li></s>
-        <s><li>Given a list of colors, generate a grid of colors</li></s>
+        <s><li>Given a list of colors, generate a grid</li></s>
     	</ul>
     </div>
   </div>
 
-  <div id="color-box-template" class="color-box-frame col-md-2 hidden">
-    <div class="color-box-img"></div>
-    <div class="color-box-text"></div>
-    <span class="badge color-remove">X</span>
-  </div>
+    <div id="color-box-template" class="color-box-frame col-md-2 hidden">
+        <div class="color-box-img"></div>
+        <div class="color-box-text"></div>
+        <a class="badge color-remove">X</a>
+    </div>
 
 </body>
 
@@ -220,22 +220,23 @@
       $('#content-html-parse').addClass('hidden');
     });
 
-    $("#canvas").sortable().disableSelection();
+    $("#canvas").sortable();
 
-    $("#source-process-button").click(function(event){
-      event.preventDefault();
+    $("#source-process-button").click(function(e){
+      e.preventDefault();
       var str = $('#source-process-text').val();
       var colors = extractColors(str);
       printColors(colors);
     });
 
-    $(".color-remove").click(function(e){
-        console.log('here');
-        // this.parent().parent().parent().remove();
+    // http://stackoverflow.com/questions/203198/event-binding-on-dynamically-created-elements
+    $('#canvas').on('click', '.color-remove', function(e) {
+      e.preventDefault();
+      $(this).parent().remove();
     });
 
-    $("#color-process-button").click(function(event){
-      event.preventDefault();
+    $("#color-process-button").click(function(e){
+      e.preventDefault();
       var colors = $("#color-csv").val().split(/[\s,;]+/);
       printColors(colors);
     });
