@@ -55,7 +55,7 @@ However to give you a taste, here's a sample on how we can currently use it (Mor
     color.getHSL(); // 148, 166, 52<br>
     color.getYUV(); // 0.179, 0.0868, -0.095
     </pre>
-* Gradient helpres:
+* Gradient helpers:
     <pre>
     color.getShades(5); <br>
     // #123456,#0e2a44,#0a2032,#061620,#020c0e,#000000<br>
