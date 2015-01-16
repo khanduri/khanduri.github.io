@@ -2,13 +2,19 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="https://rawgit.com/khanduri/color.js/ffce789432b864e2862e74ef3adc37c61b345256/color.js" type="text/javascript"></script>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <style>
   body {
     color: #444;
     background-color: #f7f7f9;
+  }
+  .color-remove {
+      cursor: pointer;
+      position: absolute;
+      left: 0px;
+      top: 0px;
   }
   .color-box-frame {
     margin: 1px;
@@ -90,7 +96,7 @@
     		<li>Be able to save color setup</li>
     		<li>Be able to add color boxes</li>
     		<li>Given a color, generate gradients</li>
-        <li>Given a link fetch all its colors</li>
+            <li>Given a link fetch all its colors</li>
     		<li><strong>In Progress: </strong>Be able to remove color boxes</li>
         <s><li>Exporting colors functionality</li></s>
         <s><li>Given a page source fetch all its colors</li></s>
@@ -102,6 +108,7 @@
   <div id="color-box-template" class="color-box-frame col-md-2 hidden">
     <div class="color-box-img"></div>
     <div class="color-box-text"></div>
+    <span class="badge color-remove">X</span>
   </div>
 
 </body>
@@ -190,6 +197,7 @@
   }
 
   $( document ).ready(function() {
+
     $('#export-scss-button').click(function(e){
       e.preventDefault();
 
@@ -219,6 +227,11 @@
       var str = $('#source-process-text').val();
       var colors = extractColors(str);
       printColors(colors);
+    });
+
+    $(".color-remove").click(function(e){
+        console.log('here');
+        // this.parent().parent().parent().remove();
     });
 
     $("#color-process-button").click(function(event){
