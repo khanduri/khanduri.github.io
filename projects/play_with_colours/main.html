@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="https://rawgit.com/khanduri/color.js/ffce789432b864e2862e74ef3adc37c61b345256/color.js" type="text/javascript"></script>
+<script src="https://rawgit.com/khanduri/color.js/4d0456534c112233ad365118160a0f7c26c581c9/color.js" type="text/javascript"></script>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <style>
   body {
@@ -61,20 +61,30 @@
       <ul class="nav nav-tabs">
         <li role="presentation" class="tab-options active" id="raw-color-list"><a>Raw Color list</a></li>
         <li role="presentation" class="tab-options" id="html-parse"><a>CSS Source Parse</a></li>
+        <li role="presentation" class="tab-options" id="gen-gradients"><a>Generate Gradients</a></li>
       </ul>
       <div id="content-placeholder">
+
         <div id="content-raw-color-list">
           <div class="color-input-div"><input id="color-csv"></input></div>
           <!-- cat assets/themes/the-minimum/css/constants.scss | grep "#" | sed "s/:/     /g" | sed "s/ //g" | cut -f2 | paste -sd " " - -->
           <div class="color-input-div"><strong>Sample Input: </strong>#ffffff, #000, #555d50, #474747, #929292, #393939, #bada55</div>
           <div class="color-input-div"><button class="btn btn-lg btn-primary" id="color-process-button">Process</button></div>
         </div>
+
         <div id="content-html-parse" class="hidden">
           <div class="color-input-div">
             <textarea id="source-process-text" rows="9" class="filler" placeholder="Paste css source code here .. We'll extract all the colors"></textarea>
           </div>
           <div class="color-input-div"><button class="btn btn-lg btn-primary" id="source-process-button">Process</button></div>
         </div>
+
+        <div id="content-gen-gradients" class="hidden">
+          <div class="color-input-div"><input id="color"></input></div>
+          <div class="color-input-div"><strong>Sample Input: </strong>#bada55</div>
+          <div class="color-input-div"><button class="btn btn-lg btn-primary" id="gradient-process-button">Process</button></div>
+        </div>
+
       </div>
     </div>
 
@@ -92,15 +102,15 @@
     <div class="project-widget" id="color-todo">
       <h4>Todo</h4>
     	<ul>
-            <li>Generate complementary / inverted colors based on the input</li>
             <li>Be able to "save" color setup</li>
             <li>Be able to add color boxes</li>
             <li>Given a link fetch all its colors</li>
-            <li><strong>In Progress: </strong>Given a color, generate gradients</li>
-        <s><li>Be able to remove color boxes</li></s>
-        <s><li>Exporting colors to SCSS constants</li></s>
-        <s><li>Given a page source fetch all its colors</li></s>
-        <s><li>Given a list of colors, generate a grid</li></s>
+            <li><strong>In Progress: </strong>Generate complementary / inverted colors based on the input</li>
+            <s> <li>Given a color, generate gradients</li></s>
+            <s><li>Be able to remove color boxes</li></s>
+            <s><li>Exporting colors to SCSS constants</li></s>
+            <s><li>Given a page source fetch all its colors</li></s>
+            <s><li>Given a list of colors, generate a grid</li></s>
     	</ul>
     </div>
   </div>
@@ -109,6 +119,10 @@
         <div class="color-box-img"></div>
         <div class="color-box-text"></div>
         <a class="badge color-remove">X</a>
+    </div>
+
+    <div id="blank-canvas" class="container hidden">
+        <h1>&nbsp;</h1>
     </div>
 
 </body>
@@ -133,7 +147,7 @@
   }
 
   var toggleActive = function(selector){
-    cleanCanvas();
+    cleanCanvas('#canvas');
     $(".tab-options").each(function( index ) {
       $(this).removeClass('active');
     });
@@ -148,8 +162,11 @@
     return '#' + flColor;
   }
 
-  var printColors = function(colors){
-      cleanCanvas();
+  var printColors = function(colors, canvas, title){
+      cleanCanvas(canvas);
+      if (title !== undefined){
+          $(canvas).append('<h1>' + title + '</h1>');
+      }
       var printedColors = {};
       for (index in colors) {
         var color = colors[index];
@@ -160,20 +177,20 @@
           template.attr("id", "color-box-template-" + index);
           template.children(".color-box-text").text(color);
           template.children(".color-box-img").css("background-color", color);
-          $('#canvas').append(template);
+          $(canvas).append(template);
           printedColors[color] = color;
         }
       }
   }
 
-  var cleanCanvas = function() {
-    $('#canvas').empty();
+  var cleanCanvas = function(canvas) {
+    $(canvas).empty();
     $('#export-text').text('');
   }
 
   var fetchColorDictFromCanvas = function() {
     var colors = {}
-    $('#canvas').children('.color-box-frame').each(function(index){
+    $('#canvas').find('.color-box-frame').each(function(index){
       var color = $(this).children('.color-box-text').first().text();
       var colorName = Color(color).getName();
       if (!(colorName in colors)) {
@@ -196,6 +213,12 @@
     }
   }
 
+    var hideContentPanes = function(){
+        $('#content-raw-color-list').addClass('hidden');
+        $('#content-html-parse').addClass('hidden');
+        $('#content-gen-gradients').addClass('hidden');
+    }
+
   $( document ).ready(function() {
 
     $('#export-scss-button').click(function(e){
@@ -206,28 +229,28 @@
       printSCSSConstants(colors);
     });
 
+    $("#gen-gradients").click(function (e) {
+        e.preventDefault();
+        toggleActive(this);
+        hideContentPanes();
+        $('#content-gen-gradients').removeClass('hidden');
+    });
+
     $("#html-parse").click(function (e) {
-      e.preventDefault();
-      toggleActive(this);
-      $('#content-raw-color-list').addClass('hidden');
-      $('#content-html-parse').removeClass('hidden');
+        e.preventDefault();
+        toggleActive(this);
+        hideContentPanes();
+        $('#content-html-parse').removeClass('hidden');
     });
 
     $("#raw-color-list").click(function (e) {
-      e.preventDefault();
-      toggleActive(this);
-      $('#content-raw-color-list').removeClass('hidden');
-      $('#content-html-parse').addClass('hidden');
+        e.preventDefault();
+        toggleActive(this);
+        hideContentPanes();
+        $('#content-raw-color-list').removeClass('hidden');
     });
 
     $("#canvas").sortable();
-
-    $("#source-process-button").click(function(e){
-      e.preventDefault();
-      var str = $('#source-process-text').val();
-      var colors = extractColors(str);
-      printColors(colors);
-    });
 
     // http://stackoverflow.com/questions/203198/event-binding-on-dynamically-created-elements
     $('#canvas').on('click', '.color-remove', function(e) {
@@ -235,10 +258,34 @@
       $(this).parent().remove();
     });
 
+    $("#gradient-process-button").click(function(e){
+      e.preventDefault();
+      var color = Color($("#color").val());
+
+      var shades = color.getShades();
+      var template = $("#blank-canvas").clone().removeClass('hidden');
+      template.attr("id", "canvas-shades");
+      $('#canvas').append(template);
+      printColors(shades, '#canvas-shades', 'Shades');
+
+      var tints = color.getTints();
+      var template = $("#blank-canvas").clone().removeClass('hidden');
+      template.attr("id", "canvas-tints");
+      $('#canvas').append(template);
+      printColors(tints, '#canvas-tints', 'Tints');
+    });
+
+    $("#source-process-button").click(function(e){
+      e.preventDefault();
+      var str = $('#source-process-text').val();
+      var colors = extractColors(str);
+      printColors(colors, '#canvas');
+    });
+
     $("#color-process-button").click(function(e){
       e.preventDefault();
       var colors = $("#color-csv").val().split(/[\s,;]+/);
-      printColors(colors);
+      printColors(colors, '#canvas');
     });
   });
 </script>
