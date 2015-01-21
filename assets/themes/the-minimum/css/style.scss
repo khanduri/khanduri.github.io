@@ -738,10 +738,10 @@ pre {
         margin-right: auto;
     }
 }
-.sec-01-a {
+.sec-01-a, .sec-03-a {
     color: $color_nandor_approx;
 }
-.sec-01-b {
+.sec-01-b, .sec-03-b {
     color: $color_celery_approx;
 }
 .sec-02-a {
@@ -901,6 +901,20 @@ pre {
 @media only screen and (min-width: 320px) and (max-width: 767px) {
     img {
         max-width: 100%;
+    }
+    .title_logo {
+        display: inline;
+        opacity: 0.6;
+        width: 40px;
+        height: 40px;
+    }
+    .sec-03-a {
+        color: $color_nandor_approx;
+        font-size: 30px;
+    }
+    .sec-03-b {
+        color: $color_celery_approx;
+        font-size: 30px;
     }
 }
 @media only screen and (min-width: 480px) {
