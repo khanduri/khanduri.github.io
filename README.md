@@ -25,6 +25,10 @@
 
 ### Usage
 
+#### Prereqs
+ - You'll need to install [jekyll](http://jekyllrb.com/)
+ - `gem install jekyll`
+ 
 #### Creating a new Post
  - `jekyll serve` .. Keep it running in a terminal
  - `rake post title="A Title" [date="2012-02-09"] [tags=[tag1,tag2]] [category="category"]`
