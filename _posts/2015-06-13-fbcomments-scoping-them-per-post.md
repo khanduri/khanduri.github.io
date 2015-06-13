@@ -6,7 +6,7 @@ title_section:
     second: "Scoped per post"
 description: ""
 category: "setup"
-tags: fb-comments,blog
+tags: fb-comments blog jekyll-bootstrap
 ---
 {% include JB/setup %}
 
