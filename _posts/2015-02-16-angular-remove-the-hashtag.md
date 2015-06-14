@@ -5,6 +5,7 @@ title_section:
     first: "Angular:"
     second: "Remove the hashtag"
 description: ""
+image: "/assets/posts/img/angular.png"
 category: "learn"
 tags: [angularjs,yeoman]
 ---

@@ -9,11 +9,11 @@
     <title>{{ page.title }}</title>
     <meta name="author" content="{{ site.author.name }}">
 
+    <meta property="fb:app_id" content="{{ site.JB.comments.facebook.appid }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ page.title }}" />
-    <meta property="og:url" content=" {{ site.production_url }}" />
-    <meta property="og:image" content="{{ site.url }}/assets/posts/img/title_logo.png" />
-    <meta property="fb:app_id" content="{{ site.JB.comments.facebook.appid }}" />
+    <meta property="og:url" content="{{ page.url }}" />
+    <meta property="og:image" content="{{ site.production_url }}{{ page.image }}" />
 
     <link href='{{ ASSET_PATH }}/css/style.css' rel="stylesheet" media="all">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
@@ -96,5 +96,6 @@
 </script>
 
   {% include JB/analytics %}
+
 </body>
 </html>

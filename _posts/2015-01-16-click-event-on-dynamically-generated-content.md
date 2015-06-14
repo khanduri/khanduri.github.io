@@ -5,6 +5,7 @@ title_section:
     first: "Click event"
     second: "on dynamically generated content"
 description: ""
+image: "/assets/posts/img/jquery.jpg"
 category: "learn"
 tags: [javascript,JQuery]
 ---

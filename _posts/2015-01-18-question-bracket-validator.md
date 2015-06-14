@@ -5,6 +5,7 @@ title_section:
     first: "Question:"
     second: "Bracket validator"
 description: ""
+image: "/assets/posts/img/interview.jpg"
 category: "question"
 tags: [algorithm,interview,python]
 ---

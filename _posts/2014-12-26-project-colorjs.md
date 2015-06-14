@@ -5,6 +5,7 @@ title_section:
     first: "Project:"
     second: "color.js"
 description: ""
+image: "/assets/posts/img/js_logo.png"
 category: "project"
 tags: [project,javascript,open-source,github]
 ---

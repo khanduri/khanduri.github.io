@@ -5,6 +5,7 @@ title_section:
     first: "Strict"
     second: "Javascript"
 description: ""
+image: "/assets/posts/img/js_logo.png"
 category: "learn"
 tags: [javascript,ECMAScript]
 ---

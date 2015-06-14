@@ -5,6 +5,7 @@ title_section:
     first: Setting
     second: up my blog
 description: ""
+image: "/assets/posts/img/jekyll.png"
 category: "setup"
 tags: [blog,jekyll,github-pages,jekyll-bootstrap]
 ---

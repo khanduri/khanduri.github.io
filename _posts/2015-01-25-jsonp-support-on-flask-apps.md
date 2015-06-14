@@ -5,6 +5,7 @@ title_section:
     first: "JSONp"
     second: "support on flask apps"
 description: ""
+image: "/assets/posts/img/flask.png"
 category: "learn"
 tags: [flask,jsonp,javascript]
 ---

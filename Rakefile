@@ -69,10 +69,12 @@ task :post do
     post.puts "    first: \"#{title.gsub(/-/,' ').split(' ').first}\""
     post.puts "    second: \"#{title.gsub(/-/,' ').split(' ')[1,title.gsub(/-/,' ').split(' ').length].join(' ')}\""
     post.puts 'description: ""'
+    post.puts 'image: ""'
     post.puts "category: #{category}"
     post.puts "tags: #{tags}"
     post.puts "---"
     post.puts "{% include JB/setup %}"
+    post.puts ""
   end
 end # task :post
 

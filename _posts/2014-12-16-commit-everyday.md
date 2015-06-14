@@ -5,6 +5,7 @@ title_section:
     first: "Commit"
     second: "everyday"
 description: ""
+image: "/assets/posts/img/github_public_contribution_20141217.png"
 category: "experiment"
 tags: [git,programming,github]
 ---

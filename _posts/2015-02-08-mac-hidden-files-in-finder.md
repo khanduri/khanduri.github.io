@@ -5,6 +5,7 @@ title_section:
     first: "Mac:"
     second: "Hidden files in finder"
 description: ""
+image: "/assets/posts/img/mac_hidden.jpg"
 category: "trick"
 tags: [mac,osx]
 ---

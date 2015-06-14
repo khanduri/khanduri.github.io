@@ -5,6 +5,7 @@ title_section:
     first: "AngularJS:"
     second: "Quick intro"
 description: ""
+image: "/assets/posts/img/angular.png"
 category: "setup"
 tags: [angularjs,javascript,MVC,tutorial,yeoman]
 ---

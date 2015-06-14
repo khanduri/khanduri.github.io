@@ -5,6 +5,7 @@ title_section:
     first: "FBComments"
     second: "Scoped per post"
 description: ""
+image: "/assets/posts/img/fbcomments.jpg"
 category: "setup"
 tags: fb-comments blog jekyll-bootstrap
 ---

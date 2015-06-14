@@ -5,6 +5,7 @@ title_section:
     first: "Yeoman:"
     second: "First impression"
 description: ""
+image: "/assets/posts/img/yeoman.png"
 category: "experiment"
 tags: [javascript,angularjs,yeoman,frontend,grunt,bower]
 ---

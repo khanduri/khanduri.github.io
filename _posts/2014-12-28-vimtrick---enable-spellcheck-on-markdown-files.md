@@ -5,6 +5,7 @@ title_section:
     first: "VimTrick"
     second: " - Enable spellcheck on markdown files"
 description: ""
+image: "/assets/posts/img/vim.jpg"
 category: "trick"
 tags: [vim,markdown]
 ---

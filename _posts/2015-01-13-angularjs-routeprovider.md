@@ -5,6 +5,7 @@ title_section:
     first: "AngularJS"
     second: "routeProvider"
 description: ""
+image: "/assets/posts/img/angular.png"
 category: "learn"
 tags: [angularjs,javascript,MVC,yeoman]
 ---

@@ -5,6 +5,7 @@ title_section:
     first: "Commit"
     second: "Everyday: checkin"
 description: ""
+image: "/assets/posts/img/github_public_contribution_20150131.png"
 category: "experiment"
 tags: [git,programming,github]
 ---
