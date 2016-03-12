@@ -5,8 +5,8 @@ title_section:
     first: "Bootstrap's"
     second: "collapsable navbar with icon"
 description: ""
-image: ""
-category: "[learn]"
+image: "/assets/posts/img/title_logo.png"
+category: "learn"
 tags: [css,html,bootstrap]
 ---
 {% include JB/setup %}
