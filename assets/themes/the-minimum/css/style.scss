@@ -248,7 +248,7 @@ pre {
         background: url('/assets/themes/the-minimum/skin/100-90-5-monochrome.png');
         background-repeat: repeat;
         background-position: 0 0;
-        background-color: #BADA55;
+        background-color: $color_astral_approx;
         margin-bottom: 1.625em;
         padding-top: 1.625em;
         padding-bottom: 1.625em;
@@ -365,7 +365,7 @@ pre {
     }
     a {
         &:link {
-            border-bottom: 1px dotted $color_conifer_approx;
+            border-bottom: 1px dotted $color_jelly_bean_approx;
         }
         &:visited {
             border-bottom: 1px dotted $color_de_york_approx;
@@ -575,6 +575,7 @@ pre {
     }
     .unit-foot {
         background: url('/assets/themes/the-minimum/skin/100-90-5-monochrome.png') repeat 0 0 $color_emperor_approx;
+        background-color: $color_astral_approx;
         color: $color_feta_approx;
         padding-top: 1.625em;
         position: relative;
@@ -625,50 +626,29 @@ pre {
 }
 .layout-page {
     .tag_box {
-        background: url('/assets/themes/the-minimum/skin/100-90-5-monochrome.png') repeat 0 0 $color_mountain_mist_approx;
         padding: 0.8125em;
         list-style: none;
-        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
         border-radius: 3px;
-        //Instead of the line below you could use @includebackground-clip($clip)
-        background-clip: padding-box;
-        //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-        box-shadow: inset 0 1px 1px $black_40, 0 1px 0 $white_40;
         li {
             display: inline;
             line-height: normal;
             vertical-align: middle;
         }
         a {
-            background-color: $color_conifer_approx;
+            background-color: $color_astral_approx;
+            color: $white_80;
             float: left;
-            border: 1px solid $color_hippie_green_approx;
             padding: 3px 6px;
-            //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
             border-radius: 3px;
             margin: 5px;
-            //Instead of the line below you could use @includebackground-clip($clip)
-            background-clip: padding-box;
-            //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-            text-shadow: 0 -1px 0 $white_40;
-            //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-            box-shadow: inset 0 1px 0 $white_40, 0 1px 1px $black_20;
-            //Instead of the line below you could use @includetransition-duration($duration-1, $duration-2, $duration-3, $duration-4, $duration-5, $duration-6, $duration-7, $duration-8, $duration-9, $duration-10)
-            transition-duration: 0.2s;
-            //Instead of the line below you could use @includeuser-select($select)
-            user-select: none;
-            &:active {
-                //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-                box-shadow: inset 0 1px 4px $black_60;
-                background: $color_tom_thumb_approx;
-                border: solid $color_tom_thumb_approx;
+            span{
+                background-color: $color_astral_approx;
+                color: $white_80;
             }
             &:hover {
-                background-color: $color_de_york_approx;
-                border: 1px solid $color_tom_thumb_approx;
+                background-color: $color_jelly_bean_approx;
                 span {
-                    background-color: $green_dark;
-                    border: 1px solid $color_de_york_approx;
+                    background-color: $white_40;
                 }
             }
         }
@@ -700,27 +680,25 @@ pre {
     }
 }
 .the-footer {
-    background-color: $color_rangoon_green_approx;
-    background-color: $color_aztec_80_approx;
-    color: $color_nandor_approx;
-    color: $alabaster_80;
+    background-color: $black_80;
+    color: $color_astral_high;
     padding-bottom: 1.625em;
     a {
         &:link {
-            color: $color_conifer_approx;
+            color: $white_90;
             border: 0;
         }
         &:visited {
-            color: $color_de_york_approx;
+            color: $white_70;
             border: 0;
         }
         &:hover {
-            color: $color_surf_approx;
+            color: $white_50;
             border: 0;
         }
     }
     ul {
-        list-style: square;
+        list-style: none;
         padding-left: 1em;
     }
     address {
@@ -742,13 +720,13 @@ pre {
     color: $color_nandor_approx;
 }
 .sec-01-b, .sec-03-b {
-    color: $color_celery_approx;
+    color: $color_astral_approx;
 }
 .sec-02-a {
-    color: $color_nandor_approx;
+    color: $white_60;
 }
 .sec-02-b {
-    color: $color_feta_approx;
+    color: $white_90;
 }
 .ie {
     .the-header {
@@ -913,7 +891,7 @@ pre {
         font-size: 30px;
     }
     .sec-03-b {
-        color: $color_celery_approx;
+        color: $color_havelock_blue_approx;
         font-size: 30px;
     }
 }
