@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Fetch rows in random order (with seed)"
+title: "Fetch rows in random order (seeded)"
 title_section:
     first: "Fetch"
-    second: "rows in random order (with seed)"
+    second: "rows in random order (seeded)"
 description: ""
 image: "/assets/posts/img/postgres.png"
 category: "learn"
