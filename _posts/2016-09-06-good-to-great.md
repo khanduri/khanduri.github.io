@@ -30,8 +30,6 @@ tags: []
 1. Work within the 3 topics of the clear hedgehog concept
 1. *Profits and cash flows are like blood and water to a healthy body: They are absolutely essential for life, but not the point of life*
 
-
-### Thoughts:
 1. The books tries to focus on sustaining greatness. This is very different than making a good decision that leads to success
 1. Stockdale's paradox is a little hard for me to understand. The core is to:
   - "retain faith that you will prevail" AND
