@@ -9,7 +9,6 @@ CONFIG = {
   'themes' => File.join(SOURCE, "_includes", "themes"),
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
-  'books' => File.join(SOURCE, "books"),
   'post_ext' => "md",
   'theme_package_version' => "0.1.0"
 }
@@ -23,8 +22,7 @@ module JB
       :themes => "_includes/themes",
       :theme_assets => "assets/themes",
       :theme_packages => "_theme_packages",
-      :posts => "_posts",
-      :books => "books"
+      :posts => "_posts"
     }
     
     def self.base
@@ -43,12 +41,22 @@ module JB
 end #JB
 
 # Usage: rake book title="A Title"
-desc "Adding a new book in #{CONFIG['books']}"
+desc "Adding a new book in #{CONFIG['posts']}"
 task :book do
-  abort("rake aborted: '#{CONFIG['books']}' directory not found.") unless FileTest.directory?(CONFIG['books'])
-  title = ENV["title"] || "new-book"
+  abort("rake aborted: '#{CONFIG['posts']}' directory not found.") unless FileTest.directory?(CONFIG['posts'])
+  title = ENV["title"] || "new-post"
+  author = ENV["author"] || "AUTHOR"
+  tags = ENV["tags"] || "[]"
+  category = ENV["category"] || ""
+  category = "\"#{category.gsub(/-/,' ')}\"" if !category.empty?
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  filename = File.join(CONFIG['books'], "#{slug}.#{CONFIG['post_ext']}")
+  begin
+    date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
+  rescue => e
+    puts "Error - date format must be YYYY-MM-DD, please check you typed it correctly!"
+    exit -1
+  end
+  filename = File.join(CONFIG['posts'], "#{date}-#{slug}.#{CONFIG['post_ext']}")
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
@@ -56,15 +64,35 @@ task :book do
   puts "Adding a new book: #{filename}"
   open(filename, 'w') do |post|
     post.puts "---"
-    post.puts "layout: book"
-    post.puts "title: \"#{title.gsub(/-/,' ')}\""
+    post.puts "layout: post"
+    post.puts "title: \"BOOK: #{title.gsub(/-/,' ')}: #{author}\""
     post.puts "title_section: "
     post.puts "    first: \"#{title.gsub(/-/,' ').split(' ').first}\""
     post.puts "    second: \"#{title.gsub(/-/,' ').split(' ')[1,title.gsub(/-/,' ').split(' ').length].join(' ')}\""
+    post.puts 'description: ""'
     post.puts 'image: ""'
+    post.puts "category: #{category}"
+    post.puts "tags: #{tags}"
     post.puts "---"
     post.puts "{% include JB/setup %}"
     post.puts ""
+    post.puts "*Author: #{author}*"
+    post.puts ""
+    post.puts "![NAME]({{ site.url }}/assets/books/PATH.jpg)"
+    post.puts ""
+    post.puts "### Notes:"
+    post.puts ""
+    post.puts "1. "
+    post.puts "1. "
+    post.puts "  * "
+    post.puts ""
+    post.puts "### Thoughts:"
+    post.puts ""
+    post.puts "1. "
+    post.puts "1. "
+    post.puts "  - "
+    post.puts ""
+
   end
 end # task :post
 # Usage: rake post title="A Title" [date="2012-02-09"] [tags=[tag1,tag2]] [category="category"]
